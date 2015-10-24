@@ -1,6 +1,5 @@
 package com.example.haasith.parse2.search_list;
 
-import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -18,20 +17,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.haasith.parse2.Profile;
+import com.example.haasith.parse2.profile.Profile;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.util.NavigationDrawerFramework;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindTutor extends NavigationDrawerFramework {
+public class FindTutor extends NavigationDrawerFramework  {
 
     RecyclerView recyclerView;
     private TutorListRecyclerAdapter Adapter;
@@ -156,6 +154,5 @@ public class FindTutor extends NavigationDrawerFramework {
 
         }
     };
-
 
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.haasith.parse2.search_list.FindTutor;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
@@ -22,7 +23,7 @@ public class SignUpOrLoginActivity extends Activity {
         if (ParseUser.getCurrentUser() != null) {
             // Start an intent for the logged in activity
             Log.d("Login Status", "Current User Exists");
-            startActivity(new Intent(this, MyActivity.class));
+            startActivity(new Intent(this, FindTutor.class));
         }
 
         // Log in button click handler

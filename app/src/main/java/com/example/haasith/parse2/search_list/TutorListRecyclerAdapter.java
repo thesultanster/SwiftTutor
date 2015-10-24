@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.haasith.parse2.Profile;
+import com.example.haasith.parse2.profile.Profile;
 import com.example.haasith.parse2.R;
 
 import java.util.Collections;
