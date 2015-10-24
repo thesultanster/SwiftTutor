@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.haasith.parse2.search_list.FindTutor;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
@@ -33,7 +34,7 @@ public class MyActivity extends Activity {
     }*/
 
     public void list(View view){
-        Intent openlist =new Intent(this,TutorList.class);
+        Intent openlist =new Intent(this, FindTutor.class);
         startActivity(openlist);
     }
 

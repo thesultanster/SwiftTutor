@@ -32,14 +32,25 @@
             android:label="@string/title_activity_my" >
         </activity>
         <activity
-            android:name=".TutorList"
-            android:label="@string/title_activity_tutor_list" >
+            android:name=".search_list.FindTutor"
+            android:label="@string/title_activity_tutor_list"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".profile" >
+        <activity android:name=".Profile" >
         </activity>
-        <activity android:name=".camera" >
+        <activity android:name=".payment.cardActivity" >
         </activity>
-        <activity android:name=".cardActivity" >
+        <activity android:name=".ViewOffers" >
         </activity>
     </application>
 

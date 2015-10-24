@@ -26,7 +26,7 @@ dependencies {
     repositories { mavenCentral() }
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.android.support:recyclerview-v7:+'
-    //compile 'com.android.support:palette-v7:+'
+    compile 'com.android.support:design:22.2.1'
     compile 'com.android.support:support-v4:+'
     //compile 'com.yqritic:recyclerview-flexibledivider:1.2.4'
     compile 'com.stripe:stripe-android:+'
