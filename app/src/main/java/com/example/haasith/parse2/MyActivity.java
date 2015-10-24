@@ -17,8 +17,7 @@ public class MyActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        Parse.initialize(this, "2tDbAvTa8jgp2Gg6S2vhAN73z7ahKhjuUg42ZPOu", "ikqObHQT7Gz9SrlU6yXY34WokA3E7odARqqrqOi3");
-        Log.d("Test Parse", ParseUser.getCurrentUser().getUsername().toString());
+
     }
         /*ParseQuery<ParseObject> query2 = ParseQuery.getQuery("username");
         query.getInBackground("xWMyZ4YEGZ", new GetCallback<ParseObject>() {

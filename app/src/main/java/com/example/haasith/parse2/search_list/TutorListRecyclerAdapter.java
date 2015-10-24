@@ -80,8 +80,10 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
         TutorListRecyclerInfo current = data.get(position);
 
         holder.userName.setText(current.getUsername());
-        holder.firstName.setText(current.getFirstName());
-        holder.lastName.setText(current.getLastName());
+        //holder.firstName.setText(current.getFirstName());
+        //holder.lastName.setText(String.valueOf(current.getDistance()));
+        holder.distance.setText(String.valueOf(current.getDistance()));
+        holder.lowestPrice.setText(String.valueOf("$" + current.getLowestPrice()));
 
     }
 
@@ -97,6 +99,8 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
         TextView userName;
         TextView firstName;
         TextView lastName;
+        TextView distance;
+        TextView lowestPrice;
         public MyViewHolderClicks mListener;
 
         // itemView will be my own custom layout View of the row
@@ -108,6 +112,8 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
             userName = (TextView) itemView.findViewById(R.id.username);
             lastName = (TextView) itemView.findViewById(R.id.lastname);
             firstName = (TextView) itemView.findViewById(R.id.firstname);
+            distance = (TextView) itemView.findViewById(R.id.distance);
+            lowestPrice = (TextView) itemView.findViewById(R.id.lowestPrice);
             itemView.setOnClickListener(this);
         }
 
