@@ -35,7 +35,7 @@
             android:label="@string/title_activity_my" >
         </activity>
         <activity
-            android:name=".search_list.FindTutor"
+            android:name=".find_tutor.FindTutor"
             android:label="@string/title_activity_tutor_list"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -55,7 +55,7 @@
         </activity>
         <activity android:name=".ViewOffers" >
         </activity>
-        <activity android:name=".ClientSession" >
+        <activity android:name=".user_session.ClientSession" >
         </activity>
     </application>
 

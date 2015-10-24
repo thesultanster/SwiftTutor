@@ -11,20 +11,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.haasith.parse2.ClientSession;
+import com.example.haasith.parse2.user_session.ClientSession;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.payment.cardActivity;
-import com.example.haasith.parse2.profile.ConfirmPaymentDialog;
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 public class Profile extends AppCompatActivity implements ConfirmPaymentCommunicator
 {
 
-    private TextView username;
-    private TextView firstname;
+    private TextView mtutorUsername;
+    private TextView tutorFirstname;
     private Button confirmPayment;
-    private String first;
-    private String last;
-    private String user;
+    private String tutorFirst;
+    private String tutorLast;
+    private String tutorUsername;
+    private String tutorId;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -36,10 +39,10 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         Bundle extras = getIntent().getExtras();
         if (extras != null)
         {
-            user = extras.getString("username");
-            //email.setText(extras.getString("email"));
-            first = extras.getString("firstname");
-            last = extras.getString("lastname");
+            tutorUsername = extras.getString("username");
+            tutorId = extras.getString("tutorId");
+            tutorFirst = extras.getString("firstname");
+            tutorLast = extras.getString("lastname");
         }
 
 
@@ -52,14 +55,14 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
         collapsingToolbarLayout.setCollapsedTitleTextColor(0xFFffffff);
-        collapsingToolbarLayout.setTitle(first + " " + last);
+        collapsingToolbarLayout.setTitle(tutorFirst + " " + tutorLast);
         collapsingToolbarLayout.setExpandedTitleColor(0xFFffffff);
 
-        username = (TextView) findViewById(R.id.username);
+        mtutorUsername = (TextView) findViewById(R.id.username);
         confirmPayment = (Button) findViewById(R.id.confirmpayment);
         //lastname = (TextView) findViewById(R.id.lastname);
 
-        username.setText(user);
+        mtutorUsername.setText(tutorUsername);
         //firstname.setText(first);
         //lastname.setText(last);
 
@@ -97,6 +100,15 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
     @Override
     public void onDialogPayment() {
+
+        ParseObject session = new ParseObject("TutorSession");
+        session.put("clientId", ParseUser.getCurrentUser().getObjectId());
+        session.put("tutorId",tutorId);
+        session.put("userRelease",false);
+        session.put("tutorRelease",false);
+        session.saveInBackground();
+
+
         Intent intent = new Intent(getApplicationContext(), ClientSession.class);
         //intent.putExtra("selectedId", data.get(position).getParseObjectId());
         startActivity(intent);

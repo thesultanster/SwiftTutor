@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.haasith.parse2.profile.Profile;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.ViewOffers;
-import com.example.haasith.parse2.search_list.FindTutor;
+import com.example.haasith.parse2.find_tutor.FindTutor;
 
 
 public class NavigationDrawerFramework extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{

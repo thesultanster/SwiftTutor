@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.search_list.FindTutor;
+import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.parse.ParseUser;
 
 

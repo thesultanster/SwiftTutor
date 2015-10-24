@@ -3,12 +3,9 @@ package com.example.haasith.parse2;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.example.haasith.parse2.search_list.FindTutor;
-import com.parse.Parse;
-import com.parse.ParseUser;
+import com.example.haasith.parse2.find_tutor.FindTutor;
 
 public class MyActivity extends Activity {
 

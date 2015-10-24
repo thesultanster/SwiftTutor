@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.search_list.FindTutor;
+import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
