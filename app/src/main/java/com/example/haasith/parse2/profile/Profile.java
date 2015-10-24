@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.haasith.parse2.ClientSession;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.payment.cardActivity;
 import com.example.haasith.parse2.profile.ConfirmPaymentDialog;
@@ -96,7 +97,7 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
     @Override
     public void onDialogPayment() {
-        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        Intent intent = new Intent(getApplicationContext(), ClientSession.class);
         //intent.putExtra("selectedId", data.get(position).getParseObjectId());
         startActivity(intent);
     }

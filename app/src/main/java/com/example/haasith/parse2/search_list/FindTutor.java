@@ -23,6 +23,7 @@ import com.example.haasith.parse2.util.NavigationDrawerFramework;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -61,6 +62,9 @@ public class FindTutor extends NavigationDrawerFramework  {
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null)
                 {
+
+                    ParseObject.pinAllInBackground(users);
+
                     Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
                     Log.d("username", "Retrieved " + users.size() + " username");
                     for (int i = 0; i < users.size(); i++)
