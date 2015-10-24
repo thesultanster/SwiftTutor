@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Splash">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter"
+        android:id="@+id/enterCreditCard"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/cardCVC"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardNumber"
+        android:layout_marginTop="70dp"
+        android:hint="Credit Card Number"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/cardExpMonth"
+        android:layout_below="@+id/cardNumber"
+        android:hint="Month"
+        android:layout_alignLeft="@+id/cardNumber"
+        android:layout_alignStart="@+id/cardNumber"
+        android:layout_alignRight="@+id/cardNumber"
+        android:layout_alignEnd="@+id/cardNumber" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/cardExpYear"
+        android:layout_below="@+id/cardExpMonth"
+        android:layout_alignLeft="@+id/cardExpMonth"
+        android:layout_alignStart="@+id/cardExpMonth"
+        android:hint="Year"
+        android:layout_alignRight="@+id/cardExpMonth"
+        android:layout_alignEnd="@+id/cardExpMonth" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardCVC"
+        android:layout_below="@+id/cardExpYear"
+        android:hint="CVC"
+        android:layout_alignLeft="@+id/cardExpYear"
+        android:layout_alignStart="@+id/cardExpYear"
+        android:layout_alignRight="@+id/cardExpYear"
+        android:layout_alignEnd="@+id/cardExpYear" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/price"
+        android:hint="Price"
+        android:layout_below="@+id/cardCVC"
+        android:layout_alignLeft="@+id/cardCVC"
+        android:layout_alignStart="@+id/cardCVC"
+        android:layout_alignRight="@+id/cardCVC"
+        android:layout_alignEnd="@+id/cardCVC" />
+</RelativeLayout>

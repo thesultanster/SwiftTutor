@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp"
+    tools:context="com.example.haasith.parse2.profile">
+
+    <ImageView
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:id="@+id/profilepic"
+        android:background="#000"
+        android:layout_alignTop="@+id/firstname"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="First Name"
+        android:id="@+id/firstname"
+        android:textSize="15sp"
+        android:layout_alignTop="@+id/lastname"
+        android:layout_toRightOf="@+id/profilepic"
+        android:layout_toEndOf="@+id/profilepic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Last Name"
+        android:id="@+id/lastname"
+        android:textSize="15sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="27sp"
+        android:layout_marginEnd="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="UserName"
+        android:id="@+id/username"
+        android:layout_below="@+id/firstname"
+        android:layout_toRightOf="@+id/profilepic"
+        android:layout_toEndOf="@+id/profilepic"
+        android:layout_marginTop="28dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="43dp"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/confirmpayment"
+        android:onClick="openpayment"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="College"
+        android:id="@+id/collegeprofile"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/profilepic"
+        android:layout_alignLeft="@+id/profilepic"
+        android:layout_alignStart="@+id/profilepic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Degree"
+        android:id="@+id/degreeprofile"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/collegeprofile"
+        android:layout_alignStart="@+id/collegeprofile" />
+
+</RelativeLayout>
