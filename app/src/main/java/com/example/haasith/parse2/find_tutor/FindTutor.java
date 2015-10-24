@@ -38,13 +38,11 @@ public class FindTutor extends NavigationDrawerFramework  {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_tutor);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         Adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
         recyclerView.setAdapter(Adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(FindTutor.this));

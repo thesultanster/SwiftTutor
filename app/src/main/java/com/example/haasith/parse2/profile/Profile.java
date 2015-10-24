@@ -103,6 +103,7 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
         ParseObject session = new ParseObject("TutorSession");
         session.put("clientId", ParseUser.getCurrentUser().getObjectId());
+        session.put("client",ParseUser.getCurrentUser());
         session.put("tutorId",tutorId);
         session.put("userRelease",false);
         session.put("tutorRelease",false);

@@ -53,7 +53,7 @@
         </activity>
         <activity android:name=".payment.cardActivity" >
         </activity>
-        <activity android:name=".ViewOffers" >
+        <activity android:name=".view_offers.ViewOffers" >
         </activity>
         <activity android:name=".user_session.ClientSession" >
         </activity>
