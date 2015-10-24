@@ -2,24 +2,96 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
     android:id="@id/relLayout"
     android:onClick="profile">
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/imageView"
-        android:scaleType="fitXY"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="username"
-        android:id="@+id/username"
-        android:textColor="#000"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="75sp"
+            android:layout_height="75sp"
+            android:scaleType="fitXY"/>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:layout_margin="10sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryText"
+                android:textSize="25sp"
+                android:text="thesultanster"
+                />
+
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryText"
+                android:textSize="25sp"
+                android:text="*****"
+                />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="15sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textColor="@color/secondaryText"
+                android:textSize="20sp"
+                android:text="11mi"
+                />
+
+            <TextView
+                android:id="@+id/lowestPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textColor="@color/secondaryText"
+                android:textSize="20sp"
+                android:text="$15"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +100,8 @@
         android:id="@+id/firstname"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView" />
+        android:layout_toEndOf="@+id/imageView"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,5 +112,6 @@
         android:layout_marginStart="37dp"
         android:layout_alignTop="@+id/firstname"
         android:layout_toRightOf="@+id/firstname"
-        android:layout_toEndOf="@+id/firstname" />
+        android:layout_toEndOf="@+id/firstname"
+        android:visibility="gone"/>
 </RelativeLayout>

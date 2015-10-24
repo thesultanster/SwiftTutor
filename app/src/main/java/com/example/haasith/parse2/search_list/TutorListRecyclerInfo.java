@@ -5,6 +5,8 @@ import android.location.Location;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.text.DecimalFormat;
+
 public class TutorListRecyclerInfo {
 
     ParseObject user;
@@ -34,7 +36,7 @@ public class TutorListRecyclerInfo {
         return user.getObjectId();
     }
 
-    public float getDistance(){
+    public double getDistance(){
 
         Location locationA = new Location("point A");
 
@@ -46,10 +48,21 @@ public class TutorListRecyclerInfo {
         locationB.setLatitude(user.getParseGeoPoint("location").getLatitude());
         locationB.setLongitude(user.getParseGeoPoint("location").getLongitude());
 
-        float distance = locationA.distanceTo(locationB);
+        double distance = locationA.distanceTo(locationB);
 
-        return distance;
+        // Convert meters to miles
+        distance = distance*0.000621371;
+        return round(distance,2);
 
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
 }

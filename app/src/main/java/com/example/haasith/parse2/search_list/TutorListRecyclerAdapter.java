@@ -82,7 +82,7 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
         holder.userName.setText(current.getUsername());
         //holder.firstName.setText(current.getFirstName());
         //holder.lastName.setText(String.valueOf(current.getDistance()));
-        holder.distance.setText(String.valueOf(current.getDistance()));
+        holder.distance.setText(String.valueOf(current.getDistance()) + "mi");
         holder.lowestPrice.setText(String.valueOf("$" + current.getLowestPrice()));
 
     }
