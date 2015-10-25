@@ -20,6 +20,7 @@ import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.user_session.CurrentSession;
 import com.example.haasith.parse2.view_offers.ViewOffers;
 import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.parse.ParseUser;
 
 
 public class NavigationDrawerFramework extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -136,10 +137,18 @@ public class NavigationDrawerFramework extends AppCompatActivity implements Navi
     private void navigate(final int itemId) {
 
         Intent intent = new Intent();
+        ParseUser user = ParseUser.getCurrentUser();
 
         switch(itemId){
             case R.id.profile:
                 intent = new Intent(this, Profile.class);
+                intent.putExtra("selectedId", user.getObjectId());
+                intent.putExtra("username", user.get("username").toString());
+                intent.putExtra("firstname", user.get("firstname").toString());
+                intent.putExtra("lastname", user.get("lastname").toString());
+                intent.putExtra("college", user.get("college").toString());
+                intent.putExtra("degree", user.get("degree").toString());
+                intent.putExtra("rating",user.getDouble("rating"));
                 break;
             case R.id.find_tutor:
                 intent = new Intent(this, FindTutor.class);
