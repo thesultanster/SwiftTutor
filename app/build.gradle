@@ -10,6 +10,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled = true
     }
     buildTypes {
         release {
@@ -30,4 +31,7 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'com.stripe:stripe-android:+'
     compile 'com.parse:parse-android:1.+'
+    compile 'org.jsoup:jsoup:1.7.3'
+    compile 'com.belerweb:pinyin4j:2.5.0'
+    compile project(':moxtra')
 }

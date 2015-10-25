@@ -11,19 +11,24 @@ import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.moxtra.sdk.MXAccountManager;
+import com.moxtra.sdk.MXChatManager;
+import com.moxtra.sdk.MXSDKConfig;
+import com.moxtra.sdk.MXSDKException;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
 //com.facebook.FacebookSdk
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements MXAccountManager.MXAccountLinkListener {
 
     private EditText usernameView;
     private EditText passwordView;
+    private static final String TAG = "MoxieChatApplication";
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -72,20 +77,30 @@ public class LoginActivity extends Activity {
                         dlg.dismiss();
                         if (e != null) {
                             // Show the error message
-                            Log.d("Login Status","Fail");
+                            Log.d("Login Status", "Fail");
                             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
                             // Start an intent for the dispatch activity
-                            Log.d("Login Status","Success");
+                            Log.d("Login Status", "Success");
                             Intent intent = new Intent(LoginActivity.this, FindTutor.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+                            Log.d("Login Status", "Success");
+
+                            setupMoxtraUser(user.getString("username"), user.getString("lastname"), user.getUsername());
                         }
                     }
                 });
             }
         });
     }
+
+    public void setupMoxtraUser(String fname, String lname, String uniqueid) {
+        final MXSDKConfig.MXUserInfo mxUserInfo = new MXSDKConfig.MXUserInfo(uniqueid, MXSDKConfig.MXUserIdentityType.IdentityUniqueId);
+        final MXSDKConfig.MXProfileInfo mxProfileInfo = new MXSDKConfig.MXProfileInfo(fname, lname, "");
+        MXAccountManager.getInstance().setupUser(mxUserInfo, mxProfileInfo, null, null, this);
+    }
+
 
     private boolean isEmpty(EditText etText) {
         if (etText.getText().toString().trim().length() > 0) {
@@ -94,6 +109,62 @@ public class LoginActivity extends Activity {
             return true;
         }
     }
+
+
+    @Override
+    public void onLinkAccountDone(boolean b) {
+        if (b) {
+            Log.i(TAG, "Linked to moxtra successfully.");
+            startMeet();
+        } else {
+            Toast.makeText(this, "Failed to setup moxtra user.", Toast.LENGTH_LONG).show();
+            Log.e(TAG, "Failed to setup moxtra.");
+        }
+
+    }
+
+    public void startMeet() {
+        try {
+            MXChatManager.getInstance().startMeet("Test meet", null, null, new MXChatManager.OnStartMeetListener() {
+                @Override
+                public void onStartMeetDone(String meetId, String meetURL) {
+                    Log.d(TAG, "Meet Started" + meetId);
+                }
+
+                @Override
+                public void onStartMeetFailed(int i, String s) {
+                    Log.e(TAG, "onStartMeetFailed" + s);
+                }
+            });
+        } catch (MXSDKException.Unauthorized unauthorized) {
+            Log.e(TAG, "Error when start meet", unauthorized);
+        } catch (MXSDKException.MeetIsInProgress meetIsInProgress) {
+            Log.e(TAG, "Error when start meet", meetIsInProgress);
+        }
+
+
+    }
+
+    public void joinMeet(String meetID) {
+
+        try {
+            MXChatManager.getInstance().joinMeet(meetID, ParseUser.getCurrentUser().getString("firstname"),
+                    new MXChatManager.OnJoinMeetListener() {
+                        @Override
+                        public void onJoinMeetDone(String meetId, String meetUrl) {
+                            Log.d(TAG, "Joined meet: " + meetId);
+                        }
+
+                        @Override
+                        public void onJoinMeetFailed() {
+                            Log.e(TAG, "Unable to join meet.");
+                        }
+                    });
+        } catch (MXSDKException.MeetIsInProgress meetIsInProgress) {
+            Log.e(TAG, "Error when join meet", meetIsInProgress);
+        }
+    }
+
 }
 
 

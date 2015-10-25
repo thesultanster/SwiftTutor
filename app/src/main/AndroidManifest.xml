@@ -11,6 +11,24 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name=".permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name=".permission.C2D_MESSAGE" />
 
     <permission android:protectionLevel="signature"
         android:name="com.example.haasith.parse2.permission.C2D_MESSAGE" />
@@ -66,7 +84,51 @@
         </activity>
         <activity android:name=".current_session.CurrentSession" >
         </activity>
+        <activity
+            android:name="com.moxtra.binder.conversation.MXConversationActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/MoxtraTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.moxtra.binder.pageview.PageViewActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/MoxtraTheme"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <service android:name="com.moxtra.binder.service.AudioPlayerService" />
+        <activity
+            android:name="com.moxtra.binder.livemeet.LiveMeetActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/MoxtraTheme">
+        </activity>
+        <activity
+            android:name="com.moxtra.binder.activity.MXStackActivity"
+            android:theme="@style/MXActivityDialog"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.moxtra.binder.member.MXInviteActivity"
+            android:theme="@style/MXActivityDialog"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.moxtra.binder.multiimagepicker.MultiImagePickerActivity"
+            android:theme="@style/MoxtraTheme" />
+        <activity
+            android:name="com.moxtra.binder.util.MXAlertDialog"
+            android:theme="@style/MoxFullTranslucentActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.moxtra.sdk.MXRemoteNotificationActivity"
+            android:noHistory="true"
+            android:theme="@style/MoxTransparentActivity" />
+        <service android:name="com.moxtra.binder.service.MeetService">
+            <intent-filter android:priority="1000">
+                <action android:name="moxtra.intent.action.START_MEET" />
+            </intent-filter>
+        </service>
 
+        <activity android:name="com.moxtra.binder.search.MXSearchActivity" />
+        <activity android:name="com.moxtra.binder.webnote.MXWebNoteActivity" />
+        <activity android:name="com.moxtra.binder.webclip.MXWebClipActivity" />
+        <activity android:name="com.moxtra.binder.livemeet.MeetRingActivity" />
 
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.example.haasith.parse2.util.Reciever"
@@ -89,6 +151,7 @@
                 <category android:name="com.example.haasith.parse2" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
