@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Haasith on 10/3/2015.
  */
-public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecyclerAdapter.MyViewHolder> {
+                                                                                                                         public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecyclerAdapter.MyViewHolder> {
 
     // emptyList takes care of null pointer exception
     List<TutorListRecyclerInfo> data = Collections.emptyList();

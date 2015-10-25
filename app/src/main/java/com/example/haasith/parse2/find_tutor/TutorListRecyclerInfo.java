@@ -17,9 +17,9 @@ public class TutorListRecyclerInfo {
     {
         return user.get("username").toString();
     }
-    public String getLowestPrice()
+    public int getLowestPrice()
     {
-        return user.get("Homework").toString();
+        return user.getInt("Homework");
     }
     public String getFirstName()
     {
