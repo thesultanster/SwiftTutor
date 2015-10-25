@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.haasith.parse2.profile.Profile;
@@ -67,6 +68,8 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
                 intent.putExtra("firstname", data.get(position).getFirstName());
                 intent.putExtra("lastname", data.get(position).getLastName());
                 intent.putExtra("tutorId", data.get(position).getParseObjectId());
+                intent.putExtra("college", data.get(position).getCollege());
+                intent.putExtra("degree", data.get(position).getDegree());
                 intent.putExtra("rating",data.get(position).getRating());
                 view.getContext().startActivity(intent);
             }
@@ -85,7 +88,7 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
 
         holder.userName.setText(current.getUsername());
         //holder.firstName.setText(current.getFirstName());
-        //holder.lastName.setText(String.valueOf(current.getDistance()));
+        holder.ratingBar.setRating((float)current.getRating());
         holder.distance.setText(String.valueOf(current.getDistance()) + "mi");
         holder.lowestPrice.setText(String.valueOf("$" + current.getLowestPrice()));
 
@@ -105,6 +108,7 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
         TextView lastName;
         TextView distance;
         TextView lowestPrice;
+        RatingBar ratingBar;
         public MyViewHolderClicks mListener;
 
         // itemView will be my own custom layout View of the row
@@ -118,6 +122,8 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
             firstName = (TextView) itemView.findViewById(R.id.firstname);
             distance = (TextView) itemView.findViewById(R.id.distance);
             lowestPrice = (TextView) itemView.findViewById(R.id.lowestPrice);
+            ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
+
             itemView.setOnClickListener(this);
         }
 

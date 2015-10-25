@@ -171,20 +171,11 @@ public class FindTutor extends NavigationDrawerFramework  {
 
             ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
 
-
-            List<ParseQuery<ParseUser>> queries = new ArrayList<ParseQuery<ParseUser>>();
-
-
             ParseQuery<ParseUser> q1 = ParseUser.getQuery();
-            q1.whereContains("subject1", search);
 
+            if(!search.equals(""))
+                q1.whereContains("subject1", search);
 
-
-            ParseQuery<ParseUser> q2 = ParseUser.getQuery();
-            q2.whereContains("subject2", search);
-
-            queries.add(q1);
-            queries.add(q2);
 
             //q1.or(queries);
             q1.whereNear("location", userLocation);

@@ -50,7 +50,7 @@ public class TutorListRecyclerInfo {
 
         // Convert meters to miles
         distance = distance*0.000621371;
-        return round(distance,2);
+        return round(distance, 2);
 
     }
 
@@ -65,6 +65,16 @@ public class TutorListRecyclerInfo {
 
     public double getRating(){
         return user.getDouble("rating");
+    }
+
+    public String getDegree(){
+        return user.getString("degree");
+
+    }
+
+    public String getCollege(){
+        return user.getString("college");
+
     }
 
 }

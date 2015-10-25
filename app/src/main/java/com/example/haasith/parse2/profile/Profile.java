@@ -26,11 +26,15 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
     private TextView mtutorUsername;
     private TextView tutorFirstname;
+    TextView college;
+    TextView degree;
     private Button confirmPayment;
     private String tutorFirst;
     private String tutorLast;
     private String tutorUsername;
     private String tutorId;
+    String tutorCollege;
+    String tutorDegree;
     double rating;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -49,6 +53,8 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             tutorFirst = extras.getString("firstname");
             tutorLast = extras.getString("lastname");
             rating = extras.getDouble("rating");
+            tutorCollege = extras.getString("college");
+            tutorDegree = extras.getString("degree");
         }
 
 
@@ -65,14 +71,16 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         collapsingToolbarLayout.setExpandedTitleColor(0xFFffffff);
 
         mtutorUsername = (TextView) findViewById(R.id.username);
+        college = (TextView) findViewById(R.id.college);
+        degree = (TextView) findViewById(R.id.degree);
         confirmPayment = (Button) findViewById(R.id.confirmpayment);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 
         ratingBar.setRating((float)rating);
         mtutorUsername.setText(tutorUsername);
-        //firstname.setText(first);
-        //lastname.setText(last);
+        college.setText(tutorCollege);
+        degree.setText(tutorDegree);
 
         confirmPayment.setOnClickListener(new View.OnClickListener() {
             @Override

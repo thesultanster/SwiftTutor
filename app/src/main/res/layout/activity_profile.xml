@@ -46,7 +46,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/collegeprofile"
+                    android:id="@+id/college"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -54,33 +54,82 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
-                    android:id="@+id/degreeprofile"
+                    android:id="@+id/degree"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
+                    android:layout_marginTop="10sp"
                     android:text="Degree"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <RadioButton
-                    android:id="@+id/homeworkAssignment"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30sp"
-                    android:layout_marginTop="30sp"
-                    android:text="Homework Assignment              $5" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
 
-                <RadioButton
-                    android:id="@+id/testReview"
-                    android:layout_width="match_parent"
-                    android:layout_height="30sp"
-                    android:layout_marginTop="10sp"
-                    android:text="Test/Midterm/Final Review       $10" />
+                    <RadioButton
+                        android:id="@+id/homeworkAssignment"
+                        android:layout_width="0dp"
+                        android:layout_height="30sp"
+                        android:layout_weight="5"
+                        android:text="Homework Assignment" />
 
-                <RadioButton
-                    android:id="@+id/crashCourse"
+                    <TextView
+                        android:id="@+id/homeworkPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$5"
+                         />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30sp"
-                    android:layout_marginTop="10sp"
-                    android:text="Crash Course                               $15" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/testReview"
+                        android:layout_width="0dp"
+                        android:layout_height="30sp"
+                        android:layout_weight="5"
+                        android:text="Test/Midterm/Final Review " />
+
+                    <TextView
+                        android:id="@+id/testReviewPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$10"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/crashCourse"
+                        android:layout_width="0dp"
+                        android:layout_height="30sp"
+                        android:layout_weight="5"
+                        android:text="Test/Midterm/Final Review " />
+
+                    <TextView
+                        android:id="@+id/crashCoursePrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$10"
+                        />
+
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/confirmpayment"
@@ -90,8 +139,7 @@
                     android:backgroundTint="@color/colorAccent"
                     android:textColor="#FFFFFF"
                     android:onClick="openpayment"
-                    android:text="Confirm" />
-
+                    android:text="Hire" />
 
             </LinearLayout>
 
