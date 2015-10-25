@@ -38,8 +38,8 @@ public class SignUpOrLoginActivity extends Activity implements MXAccountManager.
             setupMoxtraUser(ParseUser.getCurrentUser().getString("username"), ParseUser.getCurrentUser().getString("lastname"), ParseUser.getCurrentUser().getUsername());
 
             Log.d("Login Status", "Current User Exists");
-            startActivity(new Intent(this, FindTutor.class));
-            finish();
+            //startActivity(new Intent(this, FindTutor.class));
+            //finish();
         }
 
         // Log in button click handler

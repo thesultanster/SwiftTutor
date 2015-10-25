@@ -39,16 +39,15 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
     String tutorId;
     String tutorCollege;
     String tutorDegree;
+    int tutorHomeowrk;
+    int tutorTest;
+    int tutorCrash;
     CheckBox homework;
     CheckBox test;
     CheckBox crash;
 
     double rating;
     int sum = 0;
-
-    boolean homeworkT=false;
-    boolean testT=false;
-    boolean crashT=false;
 
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -67,6 +66,9 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             rating = extras.getDouble("rating");
             tutorCollege = extras.getString("college");
             tutorDegree = extras.getString("degree");
+            tutorHomeowrk = extras.getInt("tutorHomework");
+            tutorTest = extras.getInt("tutorTest");
+            tutorCrash = extras.getInt("tutorCrash");
         }
 
 
@@ -95,9 +97,9 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         test = (CheckBox) findViewById(R.id.testReview);
         crash = (CheckBox) findViewById(R.id.crashCourse);
 
-        homeworkPrice.setText("$"+ParseUser.getCurrentUser().get("Homework").toString());
-        testPrice.setText("$"+ParseUser.getCurrentUser().get("Midterm").toString());
-        crashPrice.setText("$"+ParseUser.getCurrentUser().get("CrashCourse").toString());
+        homeworkPrice.setText("$"+tutorHomeowrk);
+        testPrice.setText("$"+tutorTest);
+        crashPrice.setText("$" + tutorCrash);
 
         total.setText("$" + sum);
 
@@ -107,11 +109,11 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    sum+=ParseUser.getCurrentUser().getInt("Homework");
+                    sum+=tutorHomeowrk;
                     //homeworkT = false;
                     //homework.toggle();
                 } else {
-                    sum-=ParseUser.getCurrentUser().getInt("Homework");
+                    sum-=tutorHomeowrk;
                     //homeworkT = true;
                 }
 
@@ -123,11 +125,11 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    sum+=ParseUser.getCurrentUser().getInt("Midterm");
+                    sum+=tutorTest;
                     //testT = false;
                     //test.toggle();
                 } else {
-                    sum-=ParseUser.getCurrentUser().getInt("Midterm");
+                    sum-=tutorTest;
                     //testT = true;
                 }
 
@@ -140,11 +142,11 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    sum+=ParseUser.getCurrentUser().getInt("CrashCourse");
+                    sum+=tutorCrash;
                     //crashT = false;
                     //crash.toggle();
                 } else {
-                    sum-=ParseUser.getCurrentUser().getInt("CrashCourse");
+                    sum-=tutorCrash;
                     //crashT = true;
                 }
 

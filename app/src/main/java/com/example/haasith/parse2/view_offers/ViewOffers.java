@@ -33,6 +33,8 @@ public class ViewOffers extends NavigationDrawerFramework {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_offers);
 
+        getToolbar().setTitle("View Offers");
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         adapter = new OfferRecyclerAdapter(ViewOffers.this, new ArrayList<OfferRecyclerInfo>());
         recyclerView.setAdapter(adapter);

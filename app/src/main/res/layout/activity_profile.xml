@@ -195,7 +195,7 @@
                 android:layout_height="350dp"
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/prof"
+                android:src="@drawable/pr"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />
 

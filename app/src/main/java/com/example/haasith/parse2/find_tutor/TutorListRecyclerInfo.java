@@ -77,4 +77,14 @@ public class TutorListRecyclerInfo {
 
     }
 
+    public int getHomework(){
+        return user.getInt("Homework");
+    }
+    public int getTest(){
+        return user.getInt("Midterm");
+    }
+    public int getCrash(){
+        return user.getInt("CrashCourse");
+    }
+
 }

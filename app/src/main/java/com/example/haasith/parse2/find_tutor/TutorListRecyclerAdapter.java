@@ -71,6 +71,9 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
                 intent.putExtra("college", data.get(position).getCollege());
                 intent.putExtra("degree", data.get(position).getDegree());
                 intent.putExtra("rating",data.get(position).getRating());
+                intent.putExtra("tutorHomework", data.get(position).getHomework());
+                intent.putExtra("tutorTest", data.get(position).getTest());
+                intent.putExtra("tutorCrash",data.get(position).getCrash());
                 view.getContext().startActivity(intent);
             }
 

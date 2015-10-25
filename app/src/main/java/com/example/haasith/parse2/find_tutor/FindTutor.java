@@ -48,6 +48,8 @@ public class FindTutor extends NavigationDrawerFramework  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_tutor);
 
+        getToolbar().setTitle("Find Tutors");
+
         handleIntent(getIntent());
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
