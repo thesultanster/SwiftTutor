@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.find_tutor.FindTutor;
-import com.example.haasith.parse2.profile.Profile;
-import com.example.haasith.parse2.user_session.CurrentSession;
+import com.example.haasith.parse2.current_session.CurrentSession;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;

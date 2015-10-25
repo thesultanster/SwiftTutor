@@ -92,6 +92,7 @@ public class FindTutor extends NavigationDrawerFramework  {
         ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereNear("location", userLocation);
+        query.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
         query.findInBackground(new FindCallback<ParseUser>() {
 
 
@@ -179,6 +180,7 @@ public class FindTutor extends NavigationDrawerFramework  {
 
             //q1.or(queries);
             q1.whereNear("location", userLocation);
+            q1.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
             q1.findInBackground(new FindCallback<ParseUser>() {
 
 

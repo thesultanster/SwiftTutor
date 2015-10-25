@@ -64,7 +64,7 @@
         </activity>
         <activity android:name=".view_offers.ViewOffers" >
         </activity>
-        <activity android:name=".user_session.CurrentSession" >
+        <activity android:name=".current_session.CurrentSession" >
         </activity>
 
 

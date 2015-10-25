@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.example.haasith.parse2.profile.Profile;
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.user_session.CurrentSession;
+import com.example.haasith.parse2.current_session.CurrentSession;
 import com.example.haasith.parse2.view_offers.ViewOffers;
 import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.parse.ParseUser;

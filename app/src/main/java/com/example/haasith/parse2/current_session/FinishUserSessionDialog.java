@@ -1,4 +1,4 @@
-package com.example.haasith.parse2.user_session;
+package com.example.haasith.parse2.current_session;
 
 import android.app.Activity;
 import android.app.DialogFragment;

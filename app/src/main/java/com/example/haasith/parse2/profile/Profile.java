@@ -12,10 +12,9 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.haasith.parse2.user_session.CurrentSession;
+import com.example.haasith.parse2.current_session.CurrentSession;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.payment.cardActivity;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
