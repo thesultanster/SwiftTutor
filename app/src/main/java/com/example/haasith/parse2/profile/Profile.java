@@ -95,9 +95,9 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         test = (CheckBox) findViewById(R.id.testReview);
         crash = (CheckBox) findViewById(R.id.crashCourse);
 
-        homeworkPrice.setText(ParseUser.getCurrentUser().get("Homework").toString());
-        testPrice.setText(ParseUser.getCurrentUser().get("Midterm").toString());
-        crashPrice.setText(ParseUser.getCurrentUser().get("CrashCourse").toString());
+        homeworkPrice.setText("$"+ParseUser.getCurrentUser().get("Homework").toString());
+        testPrice.setText("$"+ParseUser.getCurrentUser().get("Midterm").toString());
+        crashPrice.setText("$"+ParseUser.getCurrentUser().get("CrashCourse").toString());
 
         total.setText("$" + sum);
 
@@ -164,7 +164,7 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
-                ConfirmPaymentDialog myDialog = new ConfirmPaymentDialog(sum);
+                ConfirmPaymentDialog myDialog = new ConfirmPaymentDialog().newInstance(sum);
                 myDialog.show(fragmentManager, "Confirm Payment");
             }
         });

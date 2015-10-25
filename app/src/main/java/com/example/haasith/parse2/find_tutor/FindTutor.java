@@ -84,7 +84,38 @@ public class FindTutor extends NavigationDrawerFramework  {
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchView.setQuery("", true);
+
+                adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
+                recyclerView.setAdapter(adapter);
+
+                ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
+                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.whereNear("location", userLocation);
+                query.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
+                query.findInBackground(new FindCallback<ParseUser>() {
+
+
+                    public void done(List<ParseUser> users, ParseException e) {
+                        if (e == null)
+                        {
+
+                            //ParseObject.pinAllInBackground(users);
+
+                            Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
+                            Log.d("username", "Retrieved " + users.size() + " username");
+                            for (int i = 0; i < users.size(); i++)
+                            {
+                                adapter.addRow(new TutorListRecyclerInfo(users.get(i)));
+                            }
+                        }
+                        else
+                        {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+
+                    }
+                });
+
             }
         });
 

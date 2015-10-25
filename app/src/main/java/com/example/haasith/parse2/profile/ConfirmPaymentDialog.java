@@ -15,9 +15,17 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
 
     TextView cancel;
     TextView yes;
+    TextView total;
     ConfirmPaymentCommunicator communicator;
+    int sum;
 
-
+    public static ConfirmPaymentDialog newInstance(int sum) {
+        ConfirmPaymentDialog f = new ConfirmPaymentDialog();
+        Bundle args = new Bundle();
+        args.putInt("sum", sum);
+        f.setArguments(args);
+        return f;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -28,9 +36,13 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_confirm_payment, null);
-        getDialog().setTitle("Confirm Payment?");
+        getDialog().setTitle("Confirm Payment");
         cancel = (TextView) view.findViewById(R.id.cancel);
         yes = (TextView) view.findViewById(R.id.yes);
+        total = (TextView) view.findViewById(R.id.total);
+
+        sum = getArguments().getInt("sum");
+        total.setText("$" + String.valueOf(sum));
 
         cancel.setOnClickListener(this);
         yes.setOnClickListener(this);

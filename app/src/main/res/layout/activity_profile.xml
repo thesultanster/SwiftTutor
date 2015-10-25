@@ -217,7 +217,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@mipmap/ic_bookmark_white_24dp"
+        android:src="@drawable/ic_bookmark_white_24dp"
         app:layout_anchor="@id/scroll"
         app:layout_anchorGravity="top|right|end"/>
 
