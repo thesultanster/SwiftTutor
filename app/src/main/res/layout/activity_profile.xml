@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:isIndicator="true"
-                    android:numStars="4"
+                    android:numStars="5"
                     android:stepSize="1.0"
                     android:rating="3.5" />
 
@@ -50,8 +50,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textSize="23sp"
+                    android:textColor="@color/primaryText"
                     android:text="College"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
                 <TextView
                     android:id="@+id/degree"
@@ -59,15 +61,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
                     android:text="Degree"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textSize="22sp"
+                    android:textColor="@color/primaryText" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="35dp">
 
-                    <RadioButton
+                    <CheckBox
                         android:id="@+id/homeworkAssignment"
                         android:layout_width="0dp"
                         android:layout_height="30sp"
@@ -90,7 +93,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp">
 
-                    <RadioButton
+                    <CheckBox
                         android:id="@+id/testReview"
                         android:layout_width="0dp"
                         android:layout_height="30sp"
@@ -113,12 +116,12 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp">
 
-                    <RadioButton
+                    <CheckBox
                         android:id="@+id/crashCourse"
                         android:layout_width="0dp"
                         android:layout_height="30sp"
                         android:layout_weight="5"
-                        android:text="Test/Midterm/Final Review " />
+                        android:text="Crash Course " />
 
                     <TextView
                         android:id="@+id/crashCoursePrice"
@@ -126,6 +129,34 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="$10"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/totalText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textSize="30sp"
+                        android:textColor="@color/secondaryText"
+                        android:text="Total:"
+                        />
+
+                    <TextView
+                        android:id="@+id/total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="30sp"
+                        android:textColor="@color/secondaryText"
+                        android:text="$44"
                         />
 
                 </LinearLayout>
@@ -186,7 +217,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/fab_background"
+        android:src="@mipmap/ic_bookmark_white_24dp"
         app:layout_anchor="@id/scroll"
         app:layout_anchorGravity="top|right|end"/>
 

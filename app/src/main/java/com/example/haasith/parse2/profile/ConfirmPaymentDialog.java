@@ -7,15 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.haasith.parse2.R;
 
 public class ConfirmPaymentDialog extends DialogFragment implements View.OnClickListener {
 
-    Button cancel;
-    Button yes;
+    TextView cancel;
+    TextView yes;
     ConfirmPaymentCommunicator communicator;
-
 
 
 
@@ -29,8 +29,8 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_confirm_payment, null);
         getDialog().setTitle("Confirm Payment?");
-        cancel = (Button) view.findViewById(R.id.cancel);
-        yes = (Button) view.findViewById(R.id.yes);
+        cancel = (TextView) view.findViewById(R.id.cancel);
+        yes = (TextView) view.findViewById(R.id.yes);
 
         cancel.setOnClickListener(this);
         yes.setOnClickListener(this);

@@ -21,7 +21,7 @@ import com.parse.ParseUser;
 
 //com.facebook.FacebookSdk
 
-public class LoginActivity extends Activity implements MXAccountManager.MXAccountLinkListener {
+public class LoginActivity extends Activity  {
 
     private EditText usernameView;
     private EditText passwordView;
@@ -87,18 +87,11 @@ public class LoginActivity extends Activity implements MXAccountManager.MXAccoun
                             startActivity(intent);
                             Log.d("Login Status", "Success");
 
-                            setupMoxtraUser(user.getString("username"), user.getString("lastname"), user.getUsername());
                         }
                     }
                 });
             }
         });
-    }
-
-    public void setupMoxtraUser(String fname, String lname, String uniqueid) {
-        final MXSDKConfig.MXUserInfo mxUserInfo = new MXSDKConfig.MXUserInfo(uniqueid, MXSDKConfig.MXUserIdentityType.IdentityUniqueId);
-        final MXSDKConfig.MXProfileInfo mxProfileInfo = new MXSDKConfig.MXProfileInfo(fname, lname, "");
-        MXAccountManager.getInstance().setupUser(mxUserInfo, mxProfileInfo, null, null, this);
     }
 
 
@@ -111,59 +104,8 @@ public class LoginActivity extends Activity implements MXAccountManager.MXAccoun
     }
 
 
-    @Override
-    public void onLinkAccountDone(boolean b) {
-        if (b) {
-            Log.i(TAG, "Linked to moxtra successfully.");
-            startMeet();
-        } else {
-            Toast.makeText(this, "Failed to setup moxtra user.", Toast.LENGTH_LONG).show();
-            Log.e(TAG, "Failed to setup moxtra.");
-        }
-
-    }
-
-    public void startMeet() {
-        try {
-            MXChatManager.getInstance().startMeet("Test meet", null, null, new MXChatManager.OnStartMeetListener() {
-                @Override
-                public void onStartMeetDone(String meetId, String meetURL) {
-                    Log.d(TAG, "Meet Started" + meetId);
-                }
-
-                @Override
-                public void onStartMeetFailed(int i, String s) {
-                    Log.e(TAG, "onStartMeetFailed" + s);
-                }
-            });
-        } catch (MXSDKException.Unauthorized unauthorized) {
-            Log.e(TAG, "Error when start meet", unauthorized);
-        } catch (MXSDKException.MeetIsInProgress meetIsInProgress) {
-            Log.e(TAG, "Error when start meet", meetIsInProgress);
-        }
 
 
-    }
-
-    public void joinMeet(String meetID) {
-
-        try {
-            MXChatManager.getInstance().joinMeet(meetID, ParseUser.getCurrentUser().getString("firstname"),
-                    new MXChatManager.OnJoinMeetListener() {
-                        @Override
-                        public void onJoinMeetDone(String meetId, String meetUrl) {
-                            Log.d(TAG, "Joined meet: " + meetId);
-                        }
-
-                        @Override
-                        public void onJoinMeetFailed() {
-                            Log.e(TAG, "Unable to join meet.");
-                        }
-                    });
-        } catch (MXSDKException.MeetIsInProgress meetIsInProgress) {
-            Log.e(TAG, "Error when join meet", meetIsInProgress);
-        }
-    }
 
 }
 

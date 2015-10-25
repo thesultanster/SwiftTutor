@@ -156,9 +156,6 @@ public class NavigationDrawerFramework extends AppCompatActivity implements Navi
             case R.id.view_offers:
                 intent = new Intent(this, ViewOffers.class);
                 break;
-            case R.id.client_session:
-                intent = new Intent(this, CurrentSession.class);
-                break;
 
         }
 

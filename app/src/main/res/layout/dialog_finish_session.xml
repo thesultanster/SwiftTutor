@@ -4,6 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp">
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:numStars="5"
+            android:stepSize="1.0"
+            android:rating="3.5" />
+
+
+    </LinearLayout>
+
 
 
     <RelativeLayout
@@ -15,18 +32,18 @@
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:padding="4dp"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:layout_alignParentRight="true"
             android:textColor="@color/colorAccent"
             android:textSize="20dp"
-            android:text="Hire" />
+            android:text="Rate" />
 
         <TextView
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:padding="4dp"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:layout_toLeftOf="@+id/yes"
             android:textColor="@color/colorAccent"
             android:textSize="20dp"

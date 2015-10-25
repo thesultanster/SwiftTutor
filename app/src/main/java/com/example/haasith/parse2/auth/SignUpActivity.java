@@ -29,7 +29,8 @@ public class SignUpActivity extends Activity {
     private EditText lastnameView;
     private EditText emailView;
     private EditText subjectone;
-    private EditText subjecttwo;
+    private EditText college;
+    private EditText degree;
     private ImageView profilepic;
     private Button uploadimage;
     private Bitmap picture;
@@ -46,7 +47,8 @@ public class SignUpActivity extends Activity {
         passwordView = (EditText) findViewById(R.id.password);
         passwordAgainView = (EditText) findViewById(R.id.passwordAgain);
         subjectone = (EditText) findViewById(R.id.subject1);
-        subjecttwo = (EditText) findViewById(R.id.subject2);
+        college = (EditText) findViewById(R.id.college);
+        degree = (EditText) findViewById(R.id.degree);
         profilepic = (ImageView) findViewById(R.id.profilepic);
         uploadimage = (Button) findViewById(R.id.uploadimage);
         //profilepic.setOnClickListener(this);
@@ -116,74 +118,11 @@ public class SignUpActivity extends Activity {
                 user.put("firstname", firstnameView.getText().toString());
                 user.put("lastname", lastnameView.getText().toString());
                 user.put("subject1", subjectone.getText().toString());
-                user.put("subject2", subjecttwo.getText().toString());
+                user.put("college", college.getText().toString());
+                user.put("degree", degree.getText().toString());
+                user.put("rating", 4.0);
 
 
-                /*Drawable drawable = res.getDrawable(R.drawable.myimage);
-                Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] data = stream.toByteArray();
-
-                ParseFile file = new ParseFile("resume.txt", data);
-                file.saveInBackground();
-
-
-                ParseObject jobApplication = new ParseObject("Tickles");
-                jobApplication.put("mediatype", "image");
-                jobApplication.put("ticklecreatedid","Mayura");
-                jobApplication.put("mediaurl", file);
-                jobApplication.saveInBackground();*/
-
-//Retrieve
-                /*ParseFile applicantResume = (ParseFile)jobApplication.get("mediaurl");
-                applicantResume.getDataInBackground(new GetDataCallback() {
-                    public void done(byte[] data, ParseException e) {
-                        if (e == null) {
-                            // data has the bytes for the resume
-                            ImageView image = (ImageView) findViewById(R.id.profilepic);
-                            Bitmap bMap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                            image.setImageBitmap(bMap);
-
-
-                        } else {
-                            // something went wrong
-                        }
-                    }
-                });*/
-
-
-
-
-
-
-
-
-
-                // Create the ParseFile
-                /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.usman);
-                byteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] image = stream.toByteArray();*/
-
-                //ParseFile file = new ParseFile("pic.png", image);
-                //user.put("imagefile", file);
-
-                /*byte[] data = "Working at Parse is great!".getBytes();
-                ParseFile file = new ParseFile("pic.png", data);
-                ParseObject userpic = new ParseObject("picture");
-                userpic.put("userpic", file);
-                userpic.saveInBackground();*/
-                /*ParseFile file = new ParseFile("picturePath", image);
-                // Upload the image into Parse Cloud
-                file.saveInBackground();
-                // Create a New Class called "ImageUpload" in Parse
-                ParseObject imgupload = new ParseObject("Image");
-                // Create a column named "ImageName" and set the string
-                imgupload.put("Image", "picturePath");
-                // Create a column named "ImageFile" and insert the image
-                imgupload.put("ImageFile", file);*/
-                // Call the Parse signup method
                 user.signUpInBackground(new SignUpCallback() {
 
                     @Override

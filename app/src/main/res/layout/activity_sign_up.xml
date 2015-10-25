@@ -1,96 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/LoginFormContainer"
     android:orientation="vertical" >
 
-    <ImageView
-        android:layout_width="100sp"
-        android:layout_height="100sp"
-        android:id="@+id/profilepic" />
-    <Button
-        android:layout_width="100sp"
-        android:layout_height="30sp"
-        android:id="@+id/uploadimage"/>
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:singleLine="true" />
-    <EditText
-        android:id="@+id/firstname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="First Name"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:singleLine="true" />
-    <EditText
-        android:id="@+id/lastname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Last Name"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:singleLine="true" />
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/prompt_username"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:singleLine="true" />
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/prompt_password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:singleLine="true" />
+    <LinearLayout
+        style="@style/LoginFormContainer"
+        android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/passwordAgain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/prompt_password_again"
-        android:imeActionId="@+id/login"
-        android:imeActionLabel="@string/action_sign_in_short"
-        android:imeOptions="actionUnspecified"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:singleLine="true" />
+        <ImageView
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:id="@+id/profilepic" />
+        <Button
+            android:layout_width="100sp"
+            android:layout_height="30sp"
+            android:id="@+id/uploadimage"/>
 
-    <EditText
-        android:id="@+id/subject1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Subject 1"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:singleLine="true" />
-    <EditText
-        android:id="@+id/subject2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Subject 2"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:singleLine="true" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+        <EditText
+            android:id="@+id/firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_username"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
 
+        <EditText
+            android:id="@+id/passwordAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_password_again"
+            android:imeActionId="@+id/login"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
 
+        <EditText
+            android:id="@+id/subject1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject 1"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+        <EditText
+            android:id="@+id/college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="College"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
 
-    <Button
-        android:id="@+id/action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="16sp"
-        android:paddingLeft="32sp"
-        android:paddingRight="32sp"
-        android:text="@string/sign_up" />
-</LinearLayout>
+        <EditText
+            android:id="@+id/degree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Degree"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="16sp"
+            android:paddingLeft="32sp"
+            android:paddingRight="32sp"
+            android:text="@string/sign_up" />
+    </LinearLayout>
+
+</ScrollView>

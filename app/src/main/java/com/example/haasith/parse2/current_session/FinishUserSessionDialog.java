@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.haasith.parse2.R;
 
 public class FinishUserSessionDialog extends DialogFragment implements View.OnClickListener {
 
-    Button cancel;
-    Button yes;
+    TextView cancel;
+    TextView yes;
     FinishUserSessionCommunicator communicator;
 
 
@@ -27,10 +28,10 @@ public class FinishUserSessionDialog extends DialogFragment implements View.OnCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_confirm_payment, null);
+        View view = inflater.inflate(R.layout.dialog_finish_session, null);
         getDialog().setTitle("Please Rate Tutor");
-        cancel = (Button) view.findViewById(R.id.cancel);
-        yes = (Button) view.findViewById(R.id.yes);
+        cancel = (TextView) view.findViewById(R.id.cancel);
+        yes = (TextView) view.findViewById(R.id.yes);
 
         cancel.setOnClickListener(this);
         yes.setOnClickListener(this);
