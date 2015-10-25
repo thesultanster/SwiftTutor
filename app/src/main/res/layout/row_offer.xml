@@ -1,91 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:id="@id/relLayout"
-    android:onClick="profile">
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
+        android:padding="10sp"
+        android:src="@color/primaryColorLight"/>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="0sp"
+        android:layout_weight="4"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="75sp"
-            android:layout_height="75sp"
-            android:scaleType="fitXY"/>
-
-
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="thesultanster"
+            android:textColor="@color/primaryText"
+            android:textSize="25sp" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:layout_margin="10sp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primaryText"
-                android:textSize="25sp"
-                android:text="thesultanster"
-                />
-
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primaryText"
-                android:textSize="25sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="3sp"
                 android:text="*****"
-                />
+                android:textColor="@color/primaryText"
+                android:textSize="25sp" />
 
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginRight="10sp"
-            android:layout_marginTop="15sp"
-            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/distance"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textColor="@color/secondaryText"
-                android:textSize="20sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="3sp"
                 android:text="11mi"
-                />
+                android:textColor="@color/secondaryText"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/offeredPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textColor="@color/secondaryText"
-                android:textSize="20sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="3sp"
                 android:text="$15"
-                />
+                android:textColor="@color/secondaryText"
+                android:textSize="20sp" />
+
 
         </LinearLayout>
 
 
+    </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10sp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/yes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_check_black_24dp" />
 
+        <ImageView
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_delete_black_24dp" />
 
 
     </LinearLayout>
 
-</RelativeLayout>
+
+</LinearLayout>
+

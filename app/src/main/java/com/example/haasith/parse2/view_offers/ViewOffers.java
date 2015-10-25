@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.TutorListRecyclerAdapter;
 import com.example.haasith.parse2.find_tutor.TutorListRecyclerInfo;
+import com.example.haasith.parse2.util.NavigationDrawerFramework;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -22,11 +23,10 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewOffers extends AppCompatActivity {
+public class ViewOffers extends NavigationDrawerFramework {
 
     RecyclerView recyclerView;
     private OfferRecyclerAdapter adapter;
-    LocationManager mLocationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,26 +40,19 @@ public class ViewOffers extends AppCompatActivity {
 
         ParseQuery<ParseObject> innerQuery = ParseQuery.getQuery("TutorSession");
         innerQuery.whereEqualTo("tutorId", ParseUser.getCurrentUser().getObjectId());
+        innerQuery.whereEqualTo("isCompleted",false);
+        innerQuery.whereEqualTo("tutorRejected",false);
         innerQuery.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> offers, ParseException e) {
 
                 for (int i = 0; i < offers.size(); i++)
                 {
-                    adapter.addRow(new OfferRecyclerInfo((ParseUser) offers.get(i).get("client")));
+                    adapter.addRow(new OfferRecyclerInfo( offers.get(i)));
                 }
 
             }
         });
 
-
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Comment");
-        query.whereMatchesQuery("post", innerQuery);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> commentList, ParseException e) {
-                // comments now contains the comments for posts with images.
-            }
-        });
 
     }
 

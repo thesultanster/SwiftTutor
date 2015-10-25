@@ -46,7 +46,7 @@ public class FinishUserSessionDialog extends DialogFragment implements View.OnCl
         } else if (view.getId() == R.id.yes) {
             dismiss();
 
-            communicator.onDialogPayment();
+            communicator.onDialogFinish();
         }
 
 
@@ -57,5 +57,5 @@ public class FinishUserSessionDialog extends DialogFragment implements View.OnCl
 
 interface FinishUserSessionCommunicator {
 
-    public void onDialogPayment();
+    public void onDialogFinish();
 }

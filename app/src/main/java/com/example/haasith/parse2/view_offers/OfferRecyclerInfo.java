@@ -7,11 +7,13 @@ import com.parse.ParseUser;
 
 public class OfferRecyclerInfo {
 
-    ParseObject user;
-    public OfferRecyclerInfo(ParseObject user)
+    ParseUser user;
+    ParseObject session;
+    public OfferRecyclerInfo(ParseObject session)
     {
         super();
-        this.user = user;
+        this.session = session;
+        this.user = (ParseUser) session.get("client");
     }
     public String getUsername()
     {
@@ -21,9 +23,23 @@ public class OfferRecyclerInfo {
     {
         return user.get("Homework").toString();
     }
-    public String getParseObjectId()
+    public String getClientId()
     {
         return user.getObjectId();
+    }
+    public String getSessionId()
+    {
+        return session.getObjectId();
+    }
+
+    public void RejectOffer(){
+        session.put("tutorRejected",true);
+        session.saveInBackground();
+    }
+
+    public void AcceptOffer(){
+        session.put("tutorAccepted",true);
+        session.saveInBackground();
     }
 
     public double getDistance(){

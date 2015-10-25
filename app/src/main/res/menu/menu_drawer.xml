@@ -17,7 +17,7 @@
         <item
             android:id="@+id/client_session"
             android:icon="@drawable/fab_background"
-            android:title="Client Session"/>
+            android:title="Current Session"/>
 
     </group>
 </menu>

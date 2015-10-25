@@ -6,11 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.example.haasith.parse2.profile.Profile;
+import com.example.haasith.parse2.user_session.CurrentSession;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +50,11 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
         data.add(row);
         notifyItemInserted(getItemCount() - 1);
     }
+    public void removeRow(int position)
+    {
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
 
     // Called when the recycler view needs to create a new row
     @Override
@@ -59,20 +69,32 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
             {
                 android.util.Log.d("rowClick", "rowClicks");
 
-                Intent intent = new Intent(context, Profile.class);
-                intent.putExtra("selectedId", data.get(position).getParseObjectId());
-                intent.putExtra("username", data.get(position).getUsername());
-                intent.putExtra("tutorId",data.get(position).getParseObjectId());
-                view.getContext().startActivity(intent);
+
             }
 
             @Override
             public void reject(int position) {
 
+                data.get(position).RejectOffer();
+                removeRow(position);
+
             }
 
             @Override
             public void accept(int position) {
+
+                data.get(position).AcceptOffer();
+
+                ParsePush parsePush = new ParsePush();
+                ParseQuery pQuery = ParseInstallation.getQuery(); // <-- Installation query
+                pQuery.whereEqualTo("clientId", data.get(position).getClientId()); // <-- you'll probably want to target someone that's not the current user, so modify accordingly
+                parsePush.sendMessageInBackground("Only for special people", pQuery);
+
+                Intent intent = new Intent(context, CurrentSession.class);
+                intent.putExtra("sessionId", data.get(position).getSessionId());
+                //intent.putExtra("username", data.get(position).getUsername());
+                intent.putExtra("clientId", data.get(position).getClientId());
+                view.getContext().startActivity(intent);
 
             }
 
@@ -91,7 +113,7 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
 
         holder.userName.setText(current.getUsername());
         //holder.firstName.setText(current.getFirstName());
-        holder.distance.setText(String.valueOf(current.getDistance()));
+        holder.distance.setText(String.valueOf(current.getDistance())+"mi");
         holder.offeredPrice.setText(String.valueOf("$" + current.getPrice()));
 
     }
@@ -108,6 +130,8 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
         TextView userName;
         TextView distance;
         TextView offeredPrice;
+        ImageView yes;
+        ImageView no;
         public MyViewHolderClicks mListener;
 
         // itemView will be my own custom layout View of the row
@@ -118,8 +142,12 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
             //Link the objects
             userName = (TextView) itemView.findViewById(R.id.username);
             distance = (TextView) itemView.findViewById(R.id.distance);
+            yes = (ImageView) itemView.findViewById(R.id.yes);
+            no = (ImageView) itemView.findViewById(R.id.no);
             offeredPrice = (TextView) itemView.findViewById(R.id.offeredPrice);
             itemView.setOnClickListener(this);
+            yes.setOnClickListener(this);
+            no.setOnClickListener(this);
         }
 
         @Override
@@ -127,6 +155,12 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
         {
             switch (v.getId())
             {
+                case R.id.yes:
+                    mListener.accept(getAdapterPosition());
+                    break;
+                case R.id.no:
+                    mListener.reject(getAdapterPosition());
+                    break;
                 default:
                     mListener.rowClick(v, getAdapterPosition());
                     break;

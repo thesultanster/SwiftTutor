@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 
@@ -19,6 +20,8 @@ public class SignUpOrLoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //ParseInstallation.getCurrentInstallation().put("userId", ParseUser.getCurrentUser().getObjectId());
+        //ParseInstallation.getCurrentInstallation().saveInBackground();
 
         if (ParseUser.getCurrentUser() != null) {
             // Start an intent for the logged in activity

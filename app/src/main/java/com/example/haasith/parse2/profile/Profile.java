@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.haasith.parse2.user_session.ClientSession;
+import com.example.haasith.parse2.user_session.CurrentSession;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.payment.cardActivity;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class Profile extends AppCompatActivity implements ConfirmPaymentCommunicator
 {
@@ -101,17 +103,27 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
     @Override
     public void onDialogPayment() {
 
-        ParseObject session = new ParseObject("TutorSession");
+        final ParseObject session = new ParseObject("TutorSession");
         session.put("clientId", ParseUser.getCurrentUser().getObjectId());
         session.put("client",ParseUser.getCurrentUser());
-        session.put("tutorId",tutorId);
-        session.put("userRelease",false);
-        session.put("tutorRelease",false);
-        session.saveInBackground();
+        session.put("tutorId", tutorId);
+        session.put("userRelease", false);
+        session.put("tutorRelease", false);
+        session.put("isCompleted",false);
+        session.put("tutorAccepted",false);
+        session.put("tutorRejected", false);
+        session.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Intent intent = new Intent(getApplicationContext(), CurrentSession.class);
+                intent.putExtra("clientId", ParseUser.getCurrentUser().getObjectId());
+                intent.putExtra("tutorId", tutorId);
+                intent.putExtra("sessionId",session.getObjectId());
+                startActivity(intent);
+            }
+        });
 
 
-        Intent intent = new Intent(getApplicationContext(), ClientSession.class);
-        //intent.putExtra("selectedId", data.get(position).getParseObjectId());
-        startActivity(intent);
+
     }
 }
