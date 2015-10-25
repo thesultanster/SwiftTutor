@@ -63,4 +63,8 @@ public class TutorListRecyclerInfo {
         return (double) tmp / factor;
     }
 
+    public double getRating(){
+        return user.getDouble("rating");
+    }
+
 }

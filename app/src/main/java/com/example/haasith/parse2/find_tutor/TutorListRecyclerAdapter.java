@@ -25,11 +25,10 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
     Context context;
     //List<TutorListRecyclerInfo>mDataSet;
 
-    public TutorListRecyclerAdapter(FindTutor context, List<TutorListRecyclerInfo> data)
-    {
+    public TutorListRecyclerAdapter(FindTutor context, List<TutorListRecyclerInfo> data) {
         this.context = context;
         inflator = LayoutInflater.from(context);
-        this.data=data;
+        this.data = data;
     }
 
 
@@ -39,23 +38,27 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
     // get byte array here
     bytearray= stream.toByteArray();*/
 
-    public void addRow(TutorListRecyclerInfo row)
-    {
+    public void addRow(TutorListRecyclerInfo row) {
         data.add(row);
         notifyItemInserted(getItemCount() - 1);
     }
 
+    public void clearData() {
+        int size = this.data.size();
+
+        data.clear();
+
+        this.notifyItemRangeRemoved(0, size);
+    }
+
     // Called when the recycler view needs to create a new row
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         final View view = inflator.inflate(R.layout.list_row, parent, false);
-        MyViewHolder holder = new MyViewHolder(view, new MyViewHolder.MyViewHolderClicks()
-        {
+        MyViewHolder holder = new MyViewHolder(view, new MyViewHolder.MyViewHolderClicks() {
 
-            public void rowClick(View caller, int position)
-            {
+            public void rowClick(View caller, int position) {
                 android.util.Log.d("rowClick", "rowClicks");
 
                 Intent intent = new Intent(context, Profile.class);
@@ -63,10 +66,11 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
                 intent.putExtra("username", data.get(position).getUsername());
                 intent.putExtra("firstname", data.get(position).getFirstName());
                 intent.putExtra("lastname", data.get(position).getLastName());
-                intent.putExtra("tutorId",data.get(position).getParseObjectId());
+                intent.putExtra("tutorId", data.get(position).getParseObjectId());
+                intent.putExtra("rating",data.get(position).getRating());
                 view.getContext().startActivity(intent);
             }
-            
+
 
         });
         return holder;
@@ -74,8 +78,7 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
 
     // Setting up the data for each row
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position)
-    {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
 
         // This gives us current information list object
         TutorListRecyclerInfo current = data.get(position);
@@ -119,17 +122,15 @@ public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecy
         }
 
         @Override
-        public void onClick(View v)
-        {
-            switch (v.getId())
-            {
+        public void onClick(View v) {
+            switch (v.getId()) {
                 default:
                     mListener.rowClick(v, getAdapterPosition());
                     break;
             }
         }
-        public interface MyViewHolderClicks
-        {
+
+        public interface MyViewHolderClicks {
             void rowClick(View caller, int position);
 
         }

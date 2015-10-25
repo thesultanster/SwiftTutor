@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.haasith.parse2.user_session.CurrentSession;
@@ -30,8 +31,10 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
     private String tutorLast;
     private String tutorUsername;
     private String tutorId;
+    double rating;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
+    RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,6 +48,7 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
             tutorId = extras.getString("tutorId");
             tutorFirst = extras.getString("firstname");
             tutorLast = extras.getString("lastname");
+            rating = extras.getDouble("rating");
         }
 
 
@@ -62,8 +66,10 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
         mtutorUsername = (TextView) findViewById(R.id.username);
         confirmPayment = (Button) findViewById(R.id.confirmpayment);
-        //lastname = (TextView) findViewById(R.id.lastname);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
+
+        ratingBar.setRating((float)rating);
         mtutorUsername.setText(tutorUsername);
         //firstname.setText(first);
         //lastname.setText(last);

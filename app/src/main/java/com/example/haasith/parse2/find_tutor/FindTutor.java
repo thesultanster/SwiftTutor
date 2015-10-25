@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.haasith.parse2.profile.Profile;
@@ -33,8 +34,13 @@ import java.util.List;
 public class FindTutor extends NavigationDrawerFramework  {
 
     RecyclerView recyclerView;
-    private TutorListRecyclerAdapter Adapter;
+    private TutorListRecyclerAdapter adapter;
     LocationManager mLocationManager;
+    SearchView searchView;
+    Button math;
+    Button english;
+    Button history;
+    Button all;
 
 
     @Override
@@ -42,13 +48,45 @@ public class FindTutor extends NavigationDrawerFramework  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_tutor);
 
+        handleIntent(getIntent());
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        Adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
-        recyclerView.setAdapter(Adapter);
+        adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(FindTutor.this));
 
+        math = (Button) findViewById(R.id.math);
+        history = (Button) findViewById(R.id.history);
+        english = (Button) findViewById(R.id.english);
+        all = (Button) findViewById(R.id.all);
 
-        Log.d("Test Parse Find Tutor", ParseUser.getCurrentUser().getUsername().toString());
+        math.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setQuery("math", true);
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setQuery("history", true);
+            }
+        });
+
+        english.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setQuery("english", true);
+            }
+        });
+
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setQuery("", true);
+            }
+        });
 
 
         ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
@@ -61,13 +99,13 @@ public class FindTutor extends NavigationDrawerFramework  {
                 if (e == null)
                 {
 
-                    ParseObject.pinAllInBackground(users);
+                    //ParseObject.pinAllInBackground(users);
 
                     Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
                     Log.d("username", "Retrieved " + users.size() + " username");
                     for (int i = 0; i < users.size(); i++)
                     {
-                        Adapter.addRow(new TutorListRecyclerInfo(users.get(i)));
+                        adapter.addRow(new TutorListRecyclerInfo(users.get(i)));
                     }
                 }
                 else
@@ -83,6 +121,7 @@ public class FindTutor extends NavigationDrawerFramework  {
 
         // TODO: Change to 90000
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 0, mLocationListener);
+
 
     }
 
@@ -105,13 +144,15 @@ public class FindTutor extends NavigationDrawerFramework  {
 
         SearchManager searchManager = (SearchManager) FindTutor.this.getSystemService(Context.SEARCH_SERVICE);
 
-        SearchView searchView = null;
+        searchView = null;
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
             searchView.setSearchableInfo(searchManager.getSearchableInfo(FindTutor.this.getComponentName()));
         }
+
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -125,10 +166,54 @@ public class FindTutor extends NavigationDrawerFramework  {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String search = intent.getStringExtra(SearchManager.QUERY);
 
+            adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
+            recyclerView.setAdapter(adapter);
+
+            ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
+
+
+            List<ParseQuery<ParseUser>> queries = new ArrayList<ParseQuery<ParseUser>>();
+
+
+            ParseQuery<ParseUser> q1 = ParseUser.getQuery();
+            q1.whereContains("subject1", search);
+
+
+
+            ParseQuery<ParseUser> q2 = ParseUser.getQuery();
+            q2.whereContains("subject2", search);
+
+            queries.add(q1);
+            queries.add(q2);
+
+            //q1.or(queries);
+            q1.whereNear("location", userLocation);
+            q1.findInBackground(new FindCallback<ParseUser>() {
+
+
+                public void done(List<ParseUser> users, ParseException e) {
+                    if (e == null) {
+
+                        //ParseObject.pinAllInBackground(users);
+
+                        Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
+                        Log.d("username", "Retrieved " + users.size() + " username");
+                        for (int i = 0; i < users.size(); i++) {
+                            adapter.addRow(new TutorListRecyclerInfo(users.get(i)));
+                        }
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+
+                }
+            });
+
 
 
         }
     }
+
+
 
     /***************************************************************************************************************/
 

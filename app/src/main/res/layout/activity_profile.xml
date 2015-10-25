@@ -11,7 +11,7 @@
 
     <!-- Scrollable View -->
     <android.support.v4.widget.NestedScrollView
-        android:id="@id/scroll"
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15sp"
@@ -25,17 +25,22 @@
                 android:orientation="vertical"
                 android:layout_margin="15sp">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="32sp"
-                    android:text="*****"/>
+                    android:layout_gravity="center_horizontal"
+                    android:isIndicator="true"
+                    android:numStars="4"
+                    android:stepSize="1.0"
+                    android:rating="3.5" />
 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
                     android:text="UserName"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textSize="20sp" />
