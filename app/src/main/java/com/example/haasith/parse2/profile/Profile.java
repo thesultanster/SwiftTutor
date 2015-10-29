@@ -2,6 +2,7 @@ package com.example.haasith.parse2.profile;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -49,8 +50,8 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
     double rating;
     int sum = 0;
 
-    private Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
+    Toolbar toolbar;
+    CollapsingToolbarLayout collapsingToolbarLayout;
     RatingBar ratingBar;
 
     @Override
@@ -211,6 +212,16 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         session.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+
+                // MY_PREFS_NAME - a static String variable like:
+                //public static final String MY_PREFS_NAME = "MyPrefsFile";
+                SharedPreferences.Editor editor = getSharedPreferences("CurrentSessionDetails", MODE_PRIVATE).edit();
+                editor.putString("clientId", ParseUser.getCurrentUser().getObjectId());
+                editor.putString("tutorId", tutorId);
+                editor.putString("sessionId",session.getObjectId());
+                editor.apply();
+
+
                 Intent intent = new Intent(getApplicationContext(), CurrentSession.class);
                 intent.putExtra("clientId", ParseUser.getCurrentUser().getObjectId());
                 intent.putExtra("tutorId", tutorId);

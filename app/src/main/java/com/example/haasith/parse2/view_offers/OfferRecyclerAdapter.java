@@ -2,6 +2,7 @@ package com.example.haasith.parse2.view_offers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.haasith.parse2.current_session.CurrentSession;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.Collections;
 import java.util.List;
@@ -88,10 +90,15 @@ public class OfferRecyclerAdapter extends RecyclerView.Adapter<OfferRecyclerAdap
                 pQuery.whereEqualTo("clientId", data.get(position).getClientId()); // <-- you'll probably want to target someone that's not the current user, so modify accordingly
                 parsePush.sendMessageInBackground("Only for special people", pQuery);
 
+
+                SharedPreferences.Editor editor = context.getSharedPreferences("CurrentSessionDetails", context.MODE_PRIVATE).edit();
+                editor.putString("clientId", data.get(position).getClientId());
+                editor.putString("tutorId", ParseUser.getCurrentUser().getObjectId());
+                editor.putString("sessionId", data.get(position).getSessionId());
+                editor.apply();
+
+
                 Intent intent = new Intent(context, CurrentSession.class);
-                intent.putExtra("sessionId", data.get(position).getSessionId());
-                //intent.putExtra("username", data.get(position).getUsername());
-                intent.putExtra("clientId", data.get(position).getClientId());
                 view.getContext().startActivity(intent);
 
             }

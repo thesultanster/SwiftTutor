@@ -14,5 +14,10 @@
             android:icon="@drawable/fab_background"
             android:title="View Offers"/>
 
+        <item
+            android:id="@+id/current_session"
+            android:icon="@drawable/fab_background"
+            android:title="Current Session"/>
+
     </group>
 </menu>
