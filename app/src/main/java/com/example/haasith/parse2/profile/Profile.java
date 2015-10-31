@@ -203,7 +203,7 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         session.put("clientId", ParseUser.getCurrentUser().getObjectId());
         session.put("client", ParseUser.getCurrentUser());
         session.put("tutorId", tutorId);
-        session.put("userRelease", false);
+        session.put("clientRelease", false);
         session.put("tutorRelease", false);
         session.put("isCompleted", false);
         session.put("tutorAccepted", false);
