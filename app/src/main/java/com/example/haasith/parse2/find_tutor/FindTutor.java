@@ -154,7 +154,7 @@ public class FindTutor extends NavigationDrawerFramework  {
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         // TODO: Change to 90000
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 0, mLocationListener);
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 300000, 0, mLocationListener);
 
 
     }
