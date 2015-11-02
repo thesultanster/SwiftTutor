@@ -2,12 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp">
+        android:layout_margin="24dp"
+        android:orientation="vertical">
+
+        <com.devmarvel.creditcardentry.library.CreditCardForm
+            android:id="@+id/credit_card_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:include_helper="false"
+            app:include_zip="false"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +30,7 @@
                 android:id="@+id/totalText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="4"
                 android:textSize="30sp"
                 android:textColor="@color/secondaryText"
                 android:text="Total"
@@ -30,14 +41,66 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="right"
                 android:textSize="30sp"
                 android:textColor="@color/secondaryText"
                 android:text="$44"
                 />
 
+
+
+
         </LinearLayout>
+<!--
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardNumber"
+            android:hint="Credit Card Number"
+            />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/cardExpMonth"
+            android:hint="Month"
+            />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/cardExpYear"
+            android:hint="Year"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardCVC"
+            android:layout_below="@+id/cardExpYear"
+            android:hint="CVC"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/price"
+            android:hint="Price"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter"
+            android:id="@+id/enterCreditCard"
+            />
+            -->
 
     </LinearLayout>
 

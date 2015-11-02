@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.1"
@@ -29,6 +34,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.1'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:design:22.2.1'
+    compile 'com.github.dbachelder:CreditCardEntry:1.4.7'
     compile 'com.android.support:support-v4:+'
     compile 'com.stripe:stripe-android:+'
     compile 'com.parse:parse-android:1.+'

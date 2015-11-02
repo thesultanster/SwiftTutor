@@ -88,8 +88,6 @@
         </activity>
         <activity android:name=".profile.Profile" >
         </activity>
-        <activity android:name=".payment.cardActivity" >
-        </activity>
         <activity android:name=".view_offers.ViewOffers" >
         </activity>
         <activity android:name=".current_session.CurrentSession" >

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.haasith.parse2.current_session.CurrentSession;
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.payment.cardActivity;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -166,9 +165,13 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         confirmPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                ConfirmPaymentDialog myDialog = new ConfirmPaymentDialog().newInstance(sum);
-                myDialog.show(fragmentManager, "Confirm Payment");
+
+                // No free transactions
+                if(sum > 0) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    ConfirmPaymentDialog myDialog = new ConfirmPaymentDialog().newInstance(sum);
+                    myDialog.show(fragmentManager, "Confirm Payment");
+                }
             }
         });
 
@@ -177,10 +180,6 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
     }
 
-    public void openpayment(View view) {
-        Intent opencardpayment = new Intent(this, cardActivity.class);
-        startActivity(opencardpayment);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
