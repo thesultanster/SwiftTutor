@@ -1,0 +1,163 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coord_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClientSession">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cloud"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></SearchView>
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="250sp" />
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:id="@+id/meetingCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="15sp"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/state"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="No Defined State"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/moxtraState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="No Moxtra Meeting"
+                            android:textSize="25sp" />
+
+                        <Button
+                            android:id="@+id/moxtraButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="60sp"
+                            android:layout_below="@+id/state"
+                            android:layout_margin="15dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:text="Connect Moxtra"
+                            android:textColor="#FFFFFF" />
+
+                        <Button
+                            android:id="@+id/finishButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="60sp"
+                            android:layout_below="@+id/moxtraButton"
+                            android:layout_margin="15dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:text="Finish Session"
+                            android:textColor="#FFFFFF" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/nullMeetingCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/meetingCard"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="15sp"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/noSessionText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="No Current Session"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/findTutorText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="Find Tutor"
+                            android:textSize="25sp" />
+
+                        <Button
+                            android:id="@+id/findTutorButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="60sp"
+                            android:layout_below="@+id/state"
+                            android:layout_margin="15dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:text="Click Me"
+                            android:textColor="#FFFFFF" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/AppTheme.Dark"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>

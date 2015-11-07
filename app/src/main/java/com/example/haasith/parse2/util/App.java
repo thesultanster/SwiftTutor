@@ -22,12 +22,17 @@ import com.parse.SaveCallback;
 public class App extends MultiDexApplication {
 
     public ParseInstallation installation;
+    public static final String CLIENT_ID = "";
+    public static final String CLIENT_SECRET = "";
+    public static final String CALLBACK_URL = "";
 
     private static final String TAG = "MoxieChatApplication";
 
     @Override
     public void onCreate()  {
         super.onCreate();
+
+
 
         // Enable Local Datastore
         Parse.enableLocalDatastore(this);
