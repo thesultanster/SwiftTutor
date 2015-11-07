@@ -60,10 +60,6 @@
                     android:textSize="12sp"
                     android:text="History"/>
 
-
-
-
-
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
