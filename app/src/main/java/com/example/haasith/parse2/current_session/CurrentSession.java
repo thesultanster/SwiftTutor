@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -380,24 +381,50 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     @Override
     public void onMapReady(final GoogleMap map) {
 
+
         GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
+
+                map.setOnMyLocationChangeListener(null);
                 LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                Marker mMarker = map.addMarker(new MarkerOptions().position(loc));
+                Marker mMarker = map.addMarker(new MarkerOptions().position(loc).draggable(true).title("Meet Here")
+                        .snippet("Long press and drag to set location."));
+
+                map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                    @Override
+                    public void onMarkerDragStart(Marker marker) {
+
+                    }
+
+                    @Override
+                    public void onMarkerDrag(Marker marker) {
+
+                    }
+
+                    @Override
+                    public void onMarkerDragEnd(Marker marker) {
+                        Log.d("map", String.valueOf(marker.getPosition().latitude));
+                    }
+                });
+
+
+
                 if(map != null){
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 18.0f));
                 }
             }
         };
+
 
 
         map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setOnMyLocationChangeListener(myLocationChangeListener);
 
-
     }
+
+
 
 
 
