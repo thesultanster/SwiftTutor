@@ -32,8 +32,6 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
     public static final String PUBLISHABLE_KEY = "pk_test_6dbsxJGJT00t1Vd17ecIZyXi";
     private CreditCardForm form;
 
-
-
     TextView cancel;
     TextView yes;
     TextView total;
@@ -71,8 +69,6 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
 
 
         //price   = (EditText) view.findViewById(R.id.price);
-
-
 
         cancel.setOnClickListener(this);
         yes.setOnClickListener(this);

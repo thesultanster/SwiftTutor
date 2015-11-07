@@ -218,13 +218,12 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
                 editor.putString("clientId", ParseUser.getCurrentUser().getObjectId());
                 editor.putString("tutorId", tutorId);
                 editor.putString("sessionId",session.getObjectId());
+                // TODO: This is defaulted to InPerson
+                editor.putString("sessionType", "inPerson");
                 editor.apply();
 
 
                 Intent intent = new Intent(getApplicationContext(), CurrentSession.class);
-                intent.putExtra("clientId", ParseUser.getCurrentUser().getObjectId());
-                intent.putExtra("tutorId", tutorId);
-                intent.putExtra("sessionId", session.getObjectId());
                 startActivity(intent);
             }
         });

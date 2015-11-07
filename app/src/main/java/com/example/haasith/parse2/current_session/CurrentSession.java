@@ -47,13 +47,16 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     Button finishSession;
     Button moxtra;
     Button findTutorButton;
+    Button finishInPersonButton;
     String clientId;
     String tutorId;
     String sessionId;
+    String sessionType;
     TextView state;
     TextView moxtraState;
     LinearLayout meetingCard;
     LinearLayout nullMeetingCard;
+    LinearLayout inPersonMeetingCard;
     ParseObject session;
     Handler mHandler;
     MapFragment mapFragment;
@@ -70,14 +73,35 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         InflateVariables();
         SetClickListeners();
 
-        // If No Session Exists
-        if(sessionId.equals("NOT_DEFINED")){
-            StartNullSession();
-        } else {
-            StartParseListenerThread();
+
+        switch (sessionType){
+            case "inPerson":
+                StartInPersonSession();
+                break;
+            default:
+                // If No Session Exists
+                if(sessionId.equals("NOT_DEFINED")){
+                    StartNullSession();
+                } else {
+                    StartParseListenerThread();
+                }
+                break;
+
         }
 
 
+
+
+
+
+
+    }
+
+    void StartInPersonSession(){
+
+        inPersonMeetingCard.setVisibility(View.VISIBLE);
+        meetingCard.setVisibility(View.GONE);
+        nullMeetingCard.setVisibility(View.GONE);
 
     }
 
@@ -100,24 +124,28 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         tutorId = prefs.getString("tutorId", "NOT_DEFINED");
         clientId = prefs.getString("clientId", "NOT_DEFINED");
         sessionId = prefs.getString("sessionId", "NOT_DEFINED");
+        sessionType = prefs.getString("sessionType", "NOT_DEFINED");
+
 
         // TODO: Delete this
         Log.d("SharedPref tutorId", tutorId);
         Log.d("SharedPref clientId", clientId);
         Log.d("SharedPref sessionId", sessionId);
+        Log.d("SharedPref sessionType", sessionType);
 
     }
 
     void InflateVariables(){
         finishSession = (Button) findViewById(R.id.finishButton);
         findTutorButton = (Button) findViewById(R.id.findTutorButton);
+        finishInPersonButton = (Button) findViewById(R.id.finishInPersonButton);
         moxtra = (Button) findViewById(R.id.moxtraButton);
         state = (TextView) findViewById(R.id.state);
         moxtraState = (TextView) findViewById(R.id.moxtraState);
         meetingCard = (LinearLayout) findViewById(R.id.meetingCard);
         nullMeetingCard = (LinearLayout) findViewById(R.id.nullMeetingCard);
-        mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
+        inPersonMeetingCard = (LinearLayout) findViewById(R.id.inPersonMeetingCard);
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -131,6 +159,16 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                 myDialog.show(fragmentManager, "Please Rate Tutor");
             }
         });
+
+        finishInPersonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FinishUserSessionDialog myDialog = new FinishUserSessionDialog();
+                myDialog.show(fragmentManager, "Please Rate Tutor");
+            }
+        });
+
 
         moxtra.setOnClickListener(new View.OnClickListener() {
             @Override

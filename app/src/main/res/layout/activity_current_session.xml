@@ -14,15 +14,22 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></SearchView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="250sp" />
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="260sp" />
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#AAFFFFFF" />
+
+        </RelativeLayout>
 
 
         <android.support.v4.widget.NestedScrollView
@@ -39,54 +46,75 @@
                     android:id="@+id/meetingCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="15sp"
+                    android:background="#FFFFFF"
                     android:orientation="vertical">
 
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/state"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="15sp"
-                        android:background="#FFFFFF"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="No Defined State"
+                        android:textSize="25sp" />
 
-                        <TextView
-                            android:id="@+id/state"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:text="No Defined State"
-                            android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/moxtraState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="No Moxtra Meeting"
+                        android:textSize="25sp" />
 
-                        <TextView
-                            android:id="@+id/moxtraState"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:text="No Moxtra Meeting"
-                            android:textSize="25sp" />
+                    <Button
+                        android:id="@+id/moxtraButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_margin="15dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Connect Moxtra"
+                        android:textColor="#FFFFFF" />
 
-                        <Button
-                            android:id="@+id/moxtraButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="60sp"
-                            android:layout_below="@+id/state"
-                            android:layout_margin="15dp"
-                            android:backgroundTint="@color/colorAccent"
-                            android:text="Connect Moxtra"
-                            android:textColor="#FFFFFF" />
-
-                        <Button
-                            android:id="@+id/finishButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="60sp"
-                            android:layout_below="@+id/moxtraButton"
-                            android:layout_margin="15dp"
-                            android:backgroundTint="@color/colorAccent"
-                            android:text="Finish Session"
-                            android:textColor="#FFFFFF" />
+                    <Button
+                        android:id="@+id/finishButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_margin="15dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Finish Session"
+                        android:textColor="#FFFFFF" />
 
 
-                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/inPersonMeetingCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/meetingCard"
+                    android:layout_margin="15sp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/dragMarkerText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="Drag Marker to Set Meeting Location"
+                        android:textSize="15sp" />
+
+
+                    <Button
+                        android:id="@+id/finishInPersonButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_margin="15dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Finish Session"
+                        android:textColor="#FFFFFF" />
 
 
                 </LinearLayout>
@@ -96,44 +124,38 @@
                     android:id="@+id/nullMeetingCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/meetingCard"
+                    android:layout_below="@+id/inPersonMeetingCard"
+                    android:layout_margin="15sp"
+                    android:background="#FFFFFF"
                     android:orientation="vertical">
 
-                    <LinearLayout
+
+                    <TextView
+                        android:id="@+id/noSessionText"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="15sp"
-                        android:background="#FFFFFF"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="No Current Session"
+                        android:textSize="25sp" />
 
-                        <TextView
-                            android:id="@+id/noSessionText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:text="No Current Session"
-                            android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/findTutorText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="Find Tutor"
+                        android:textSize="25sp" />
 
-                        <TextView
-                            android:id="@+id/findTutorText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:text="Find Tutor"
-                            android:textSize="25sp" />
+                    <Button
+                        android:id="@+id/findTutorButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_below="@+id/state"
+                        android:layout_margin="15dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Click Me"
+                        android:textColor="#FFFFFF" />
 
-                        <Button
-                            android:id="@+id/findTutorButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="60sp"
-                            android:layout_below="@+id/state"
-                            android:layout_margin="15dp"
-                            android:backgroundTint="@color/colorAccent"
-                            android:text="Click Me"
-                            android:textColor="#FFFFFF" />
-
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
