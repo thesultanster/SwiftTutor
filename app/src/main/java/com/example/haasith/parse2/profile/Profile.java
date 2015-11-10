@@ -228,6 +228,9 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
 
 
                 Intent intent = new Intent(getApplicationContext(), Booking.class);
+                intent.putExtra("tutorHomework", tutorHomeowrk);
+                intent.putExtra("tutorTest", tutorTest);
+                intent.putExtra("tutorCrash",tutorCrash);
                 startActivity(intent);
             }
         });
