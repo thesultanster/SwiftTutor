@@ -41,12 +41,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <LinearLayout
+                    android:id="@+id/tipCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginTop="15sp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:padding="15sp">
+
+                    <TextView
+                        android:id="@+id/tipText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Drag Marker to set meeting location\nThen click Notify Meeting Location"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tutorMeetingState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Tutor does not yet know the location"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/meetingCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15sp"
+                    android:layout_below="@+id/tipCard"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
                     android:orientation="vertical">
 
@@ -59,13 +91,24 @@
                         android:text="No Defined State"
                         android:textSize="25sp" />
 
+
+                    <Button
+                        android:id="@+id/setLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_margin="15dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Notify Meeting Location"
+                        android:textColor="#FFFFFF" />
+
                     <TextView
                         android:id="@+id/moxtraState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:text="No Moxtra Meeting"
-                        android:textSize="25sp" />
+                        android:textSize="25sp"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/moxtraButton"
@@ -74,41 +117,11 @@
                         android:layout_margin="15dp"
                         android:backgroundTint="@color/colorAccent"
                         android:text="Connect Moxtra"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/finishButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="60sp"
-                        android:layout_margin="15dp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:text="Finish Session"
-                        android:textColor="#FFFFFF" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/inPersonMeetingCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/meetingCard"
-                    android:layout_margin="15sp"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:id="@+id/dragMarkerText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:text="Drag Marker to Set Meeting Location"
-                        android:textSize="15sp" />
-
-
-                    <Button
-                        android:id="@+id/finishInPersonButton"
                         android:layout_width="match_parent"
                         android:layout_height="60sp"
                         android:layout_margin="15dp"
@@ -124,7 +137,7 @@
                     android:id="@+id/nullMeetingCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/inPersonMeetingCard"
+                    android:layout_below="@+id/meetingCard"
                     android:layout_margin="15sp"
                     android:background="#FFFFFF"
                     android:orientation="vertical">

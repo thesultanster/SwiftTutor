@@ -47,19 +47,22 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     Button finishSession;
     Button moxtra;
     Button findTutorButton;
-    Button finishInPersonButton;
+    Button setLocation;
     String clientId;
     String tutorId;
     String sessionId;
     String sessionType;
     TextView state;
+    TextView tipText;
     TextView moxtraState;
     LinearLayout meetingCard;
     LinearLayout nullMeetingCard;
     LinearLayout inPersonMeetingCard;
     ParseObject session;
     Handler mHandler;
+
     MapFragment mapFragment;
+    Marker marker;
 
 
     private static final String TAG = "MoxieChatApplication";
@@ -73,7 +76,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         InflateVariables();
         SetClickListeners();
 
-
+/*
         switch (sessionType){
             case "inPerson":
                 StartInPersonSession();
@@ -88,8 +91,24 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                 break;
 
         }
+        */
+
+        // If No Session Exists
+        if(sessionId.equals("NOT_DEFINED")){
+            StartNullSession();
+        } else {
+            StartParseListenerThread();
+        }
 
 
+        // If client
+        if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
+
+        }
+        // If tutor
+        else {
+
+        }
 
 
 
@@ -97,6 +116,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
     }
 
+    //TODO: Delete this
     void StartInPersonSession(){
 
         inPersonMeetingCard.setVisibility(View.VISIBLE);
@@ -138,13 +158,13 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     void InflateVariables(){
         finishSession = (Button) findViewById(R.id.finishButton);
         findTutorButton = (Button) findViewById(R.id.findTutorButton);
-        finishInPersonButton = (Button) findViewById(R.id.finishInPersonButton);
+        setLocation = (Button) findViewById(R.id.setLocation);
         moxtra = (Button) findViewById(R.id.moxtraButton);
+        tipText = (TextView) findViewById(R.id.tipText);
         state = (TextView) findViewById(R.id.state);
         moxtraState = (TextView) findViewById(R.id.moxtraState);
         meetingCard = (LinearLayout) findViewById(R.id.meetingCard);
         nullMeetingCard = (LinearLayout) findViewById(R.id.nullMeetingCard);
-        inPersonMeetingCard = (LinearLayout) findViewById(R.id.inPersonMeetingCard);
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
@@ -160,12 +180,11 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
             }
         });
 
-        finishInPersonButton.setOnClickListener(new View.OnClickListener() {
+        setLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FinishUserSessionDialog myDialog = new FinishUserSessionDialog();
-                myDialog.show(fragmentManager, "Please Rate Tutor");
+                session.put("meetClientLocation", marker.getPosition());
+                session.saveInBackground();
             }
         });
 
@@ -270,6 +289,10 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                                 moxtra.setVisibility(View.INVISIBLE);
                             }
 
+                            if(session.get("sessionType").toString().equals("inPerson")){
+
+                            }
+
 
                         }
                         // If Tutor
@@ -280,7 +303,6 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                             if(session.get("clientRelease") == true){
                                 state.setText("Client Left the Session");
                             }
-
 
                         }
 
@@ -424,10 +446,11 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
             @Override
             public void onMyLocationChange(Location location) {
 
-                map.setOnMyLocationChangeListener(null);
                 LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
                 Marker mMarker = map.addMarker(new MarkerOptions().position(loc).draggable(true).title("Meet Here")
                         .snippet("Long press and drag to set location."));
+
+                marker = mMarker;
 
                 map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                     @Override
@@ -441,16 +464,18 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                     }
 
                     @Override
-                    public void onMarkerDragEnd(Marker marker) {
-                        Log.d("map", String.valueOf(marker.getPosition().latitude));
+                    public void onMarkerDragEnd(Marker mark) {
+                        //Log.d("map", String.valueOf(marker.getPosition().latitude));
+                        marker = mark;
                     }
                 });
 
-
+                map.setOnMyLocationChangeListener(null);
 
                 if(map != null){
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 18.0f));
                 }
+
             }
         };
 

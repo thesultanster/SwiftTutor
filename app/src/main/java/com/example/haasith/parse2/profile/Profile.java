@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.haasith.parse2.booking.Booking;
 import com.example.haasith.parse2.current_session.CurrentSession;
 import com.example.haasith.parse2.R;
 import com.parse.ParseException;
@@ -208,6 +209,9 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         session.put("tutorAccepted", false);
         session.put("tutorRejected", false);
         session.put("meetingId", "0");
+        session.put("meetClientLocation" , "NA");
+        // TODO: This is defaulted to inPerson
+        session.put("sessionType", "inPerson");
         session.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -217,13 +221,13 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
                 SharedPreferences.Editor editor = getSharedPreferences("CurrentSessionDetails", MODE_PRIVATE).edit();
                 editor.putString("clientId", ParseUser.getCurrentUser().getObjectId());
                 editor.putString("tutorId", tutorId);
-                editor.putString("sessionId",session.getObjectId());
+                editor.putString("sessionId", session.getObjectId());
                 // TODO: This is defaulted to InPerson
                 editor.putString("sessionType", "inPerson");
                 editor.apply();
 
 
-                Intent intent = new Intent(getApplicationContext(), CurrentSession.class);
+                Intent intent = new Intent(getApplicationContext(), Booking.class);
                 startActivity(intent);
             }
         });

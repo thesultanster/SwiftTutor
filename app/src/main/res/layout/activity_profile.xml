@@ -14,165 +14,159 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15sp"
         android:background="#FFffffff"
+        android:padding="15sp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15sp"
+            android:orientation="vertical">
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="3.5"
+                android:stepSize="1.0" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="UserName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="College"
+                android:textColor="@color/primaryText"
+                android:textSize="23sp" />
+
+            <TextView
+                android:id="@+id/degree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="Degree"
+                android:textColor="@color/primaryText"
+                android:textSize="22sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="15sp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:orientation="horizontal">
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:stepSize="1.0"
-                    android:rating="3.5" />
+                <CheckBox
+                    android:id="@+id/homeworkAssignment"
+                    android:layout_width="0dp"
+                    android:layout_height="30sp"
+                    android:layout_weight="5"
+                    android:text="Homework Assignment" />
 
                 <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/homeworkPrice"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="UserName"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/college"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textSize="23sp"
-                    android:textColor="@color/primaryText"
-                    android:text="College"
-                     />
-
-                <TextView
-                    android:id="@+id/degree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
-                    android:text="Degree"
-                    android:textSize="22sp"
-                    android:textColor="@color/primaryText" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="35dp">
-
-                    <CheckBox
-                        android:id="@+id/homeworkAssignment"
-                        android:layout_width="0dp"
-                        android:layout_height="30sp"
-                        android:layout_weight="5"
-                        android:text="Homework Assignment" />
-
-                    <TextView
-                        android:id="@+id/homeworkPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="$5"
-                         />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
-
-                    <CheckBox
-                        android:id="@+id/testReview"
-                        android:layout_width="0dp"
-                        android:layout_height="30sp"
-                        android:layout_weight="5"
-                        android:text="Test/Midterm/Final Review " />
-
-                    <TextView
-                        android:id="@+id/testReviewPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="$10"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
-
-                    <CheckBox
-                        android:id="@+id/crashCourse"
-                        android:layout_width="0dp"
-                        android:layout_height="30sp"
-                        android:layout_weight="5"
-                        android:text="Crash Course " />
-
-                    <TextView
-                        android:id="@+id/crashCoursePrice"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="$10"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:id="@+id/totalText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:textSize="30sp"
-                        android:textColor="@color/secondaryText"
-                        android:text="Total:"
-                        />
-
-                    <TextView
-                        android:id="@+id/total"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="30sp"
-                        android:textColor="@color/secondaryText"
-                        android:text="$44"
-                        />
-
-                </LinearLayout>
-
-
-                <Button
-                    android:id="@+id/confirmpayment"
-                    android:layout_width="match_parent"
-                    android:layout_height="60sp"
-                    android:layout_marginTop="15sp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="#FFFFFF"
-                    android:onClick="openpayment"
-                    android:text="Hire" />
+                    android:layout_weight="1"
+                    android:text="$5" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/testReview"
+                    android:layout_width="0dp"
+                    android:layout_height="30sp"
+                    android:layout_weight="5"
+                    android:text="Test/Midterm/Final Review " />
+
+                <TextView
+                    android:id="@+id/testReviewPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/crashCourse"
+                    android:layout_width="0dp"
+                    android:layout_height="30sp"
+                    android:layout_weight="5"
+                    android:text="Crash Course " />
+
+                <TextView
+                    android:id="@+id/crashCoursePrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/totalText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="Total:"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$44"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/confirmpayment"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:layout_marginTop="15sp"
+                android:backgroundTint="@color/colorAccent"
+                android:onClick="openpayment"
+                android:text="Hire"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
@@ -219,7 +213,7 @@
         android:clickable="true"
         android:src="@drawable/ic_bookmark_white_24dp"
         app:layout_anchor="@id/scroll"
-        app:layout_anchorGravity="top|right|end"/>
+        app:layout_anchorGravity="top|right|end" />
 
 
 </android.support.design.widget.CoordinatorLayout>
