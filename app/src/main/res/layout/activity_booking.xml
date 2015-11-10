@@ -7,16 +7,17 @@
     tools:context=".Booking">
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/recyclerView"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cloud"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            >
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
                 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/map"
                     android:name="com.google.android.gms.maps.MapFragment"
+                    class="com.example.haasith.parse2.booking.BookingMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="260sp" />
 
@@ -35,7 +37,6 @@
 
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -44,12 +45,12 @@
                     android:id="@+id/tipCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="15sp"
                     android:layout_marginLeft="15sp"
                     android:layout_marginRight="15sp"
                     android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tipText"
@@ -58,17 +59,16 @@
                         android:layout_marginLeft="15sp"
                         android:layout_marginRight="15sp"
                         android:layout_marginTop="15sp"
-                        android:text="Tip: Drag Marker to set meeting location\nThen click Notify Meeting Location"
+                        android:text="Tip: Drag Marker to set meeting location\n        Then click Notify Meeting Location"
                         android:textSize="15sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="5sp"
                         android:layout_marginLeft="15sp"
                         android:layout_marginRight="15sp"
-                        android:layout_marginBottom="5sp"
-                        android:layout_marginTop="5sp"
-                       >
+                        android:layout_marginTop="5sp">
 
                         <TextView
                             android:id="@+id/okText"
@@ -78,23 +78,20 @@
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
                             android:padding="10sp"
-                            android:textColor="@color/colorAccent"
-                            android:text="Ok"/>
+                            android:text="Ok"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:id="@+id/neverRemindText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toLeftOf="@+id/okText"
-                            android:padding="10sp"
                             android:gravity="center"
-                            android:textColor="@color/colorAccent"
-                            android:text="Never Remind Again"/>
-
-
+                            android:padding="10sp"
+                            android:text="Never Remind Again"
+                            android:textColor="@color/colorAccent" />
 
                     </RelativeLayout>
-
 
                 </LinearLayout>
 
@@ -103,20 +100,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/tipCard"
-                    android:layout_marginLeft="15sp"
-                    android:layout_marginRight="15sp"
-                    android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tipState"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginTop="15sp"
-                        android:text="Tutor does not yet know the location"
-                        android:textSize="15sp" />
 
                     <Button
                         android:id="@+id/setLocation"
@@ -124,7 +109,7 @@
                         android:layout_height="60sp"
                         android:layout_margin="15dp"
                         android:backgroundTint="@color/colorAccent"
-                        android:text="Notify Meeting Location"
+                        android:text="Set Meeting Location"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -174,6 +159,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/gigCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/meetingCard"
@@ -188,10 +174,10 @@
                         android:id="@+id/chooseGigText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/secondaryText"
                         android:layout_margin="15sp"
-                        android:textSize="25sp"
-                        android:text="Choose your gig"/>
+                        android:text="Choose your gig"
+                        android:textColor="@color/secondaryText"
+                        android:textSize="25sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
