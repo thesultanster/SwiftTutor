@@ -49,14 +49,51 @@
                     android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
                     android:orientation="vertical"
-                    android:padding="15sp">
+                    >
 
                     <TextView
                         android:id="@+id/tipText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="15sp"
+                        android:layout_marginRight="15sp"
+                        android:layout_marginTop="15sp"
                         android:text="Tip: Drag Marker to set meeting location\nThen click Notify Meeting Location"
                         android:textSize="15sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15sp"
+                        android:layout_marginRight="15sp"
+                        android:layout_marginBottom="5sp"
+                        android:layout_marginTop="5sp"
+                       >
+
+                        <TextView
+                            android:id="@+id/okText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="5sp"
+                            android:gravity="center"
+                            android:padding="10sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="Ok"/>
+
+                        <TextView
+                            android:id="@+id/neverRemindText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/okText"
+                            android:padding="10sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:text="Never Remind Again"/>
+
+
+
+                    </RelativeLayout>
 
 
                 </LinearLayout>
@@ -147,12 +184,20 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/chooseGigText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondaryText"
+                        android:layout_margin="15sp"
+                        android:textSize="25sp"
+                        android:text="Choose your gig"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15sp"
                         android:layout_marginRight="15sp"
-                        android:layout_marginTop="15sp"
                         android:orientation="horizontal">
 
                         <CheckBox
@@ -184,7 +229,7 @@
                             android:layout_width="0dp"
                             android:layout_height="30sp"
                             android:layout_weight="4"
-                            android:text="Test/Midterm/Final Review " />
+                            android:text="Test/Midterm Review " />
 
                         <TextView
                             android:id="@+id/testReviewPrice"
@@ -208,7 +253,7 @@
                             android:layout_width="0dp"
                             android:layout_height="30sp"
                             android:layout_weight="4"
-                            android:text="Crash Course " />
+                            android:text="Crash Course / Final " />
 
                         <TextView
                             android:id="@+id/crashCoursePrice"
