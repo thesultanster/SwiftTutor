@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cloud"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -37,9 +36,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/tipCard"
@@ -50,7 +46,8 @@
                     android:layout_marginRight="15sp"
                     android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tipText"
@@ -68,7 +65,7 @@
                         android:layout_marginBottom="5sp"
                         android:layout_marginLeft="15sp"
                         android:layout_marginRight="15sp"
-                        android:layout_marginTop="5sp" >
+                        android:layout_marginTop="5sp">
 
                         <TextView
                             android:id="@+id/okText"
@@ -114,49 +111,107 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:id="@+id/meetingCard"
+                    android:id="@+id/setTimeCard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/setLocationCard"
+                    android:layout_marginBottom="15sp"
                     android:layout_marginLeft="15sp"
                     android:layout_marginRight="15sp"
                     android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
 
-
-                    <TextView
-                        android:id="@+id/state"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:text="No Defined State"
-                        android:textSize="25sp" />
+                        android:padding="25sp"
+                        android:background="@color/primaryColor"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textSize="65sp"
+                            android:textColor="@color/white"
+                            android:text="18"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/primaryColorDark"
+                            android:textSize="15sp"
+                            android:text="July 2015"/>
+
+
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/moxtraState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:text="No Moxtra Meeting"
-                        android:textSize="25sp"
-                        android:visibility="gone" />
+                        android:background="@color/coal"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:text="Monday"/>
 
-                    <Button
-                        android:id="@+id/bookTutorButton"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60sp"
-                        android:layout_margin="15dp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:text="Book Tutor"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="wrap_content"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:id="@+id/timeIcon"
+                            android:layout_width="70sp"
+                            android:layout_height="100sp"
+                            android:padding="20sp"
+                            android:src="@color/primaryColorDark"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingTop="15sp"
+                            android:paddingBottom="15sp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="3"
+                                android:layout_toRightOf="@+id/timeIcon"
+                                android:layout_marginTop="5sp"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/coal"
+                                android:textSize="30sp"
+                                android:text="06:30"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:layout_toRightOf="@+id/timeIcon"
+                                android:layout_marginTop="5sp"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/primaryColorDark"
+                                android:textSize="15sp"
+                                android:text="Mon Tue Wed Thu Fri Sat"/>
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
 
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/gigCard"
@@ -166,7 +221,6 @@
                     android:layout_marginBottom="15sp"
                     android:layout_marginLeft="15sp"
                     android:layout_marginRight="15sp"
-                    android:layout_marginTop="15sp"
                     android:background="#FFFFFF"
                     android:orientation="vertical">
 
@@ -177,7 +231,7 @@
                         android:layout_margin="15sp"
                         android:text="Choose your gig"
                         android:textColor="@color/secondaryText"
-                        android:textSize="25sp" />
+                        android:textSize="30sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -265,7 +319,7 @@
                             android:layout_weight="4"
                             android:text="Total:"
                             android:textColor="@color/secondaryText"
-                            android:textSize="30sp" />
+                            android:textSize="25sp" />
 
                         <TextView
                             android:id="@+id/total"
@@ -289,9 +343,6 @@
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
-
-            </RelativeLayout>
-
 
         </LinearLayout>
 

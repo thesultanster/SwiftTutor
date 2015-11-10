@@ -86,6 +86,7 @@ public class Booking extends AppCompatActivity {
 
     }
 
+    // Set Click Listeners
     private void SetClickListeners() {
 
         okText.setOnClickListener(new View.OnClickListener() {
