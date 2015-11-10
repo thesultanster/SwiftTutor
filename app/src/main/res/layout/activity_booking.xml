@@ -68,7 +68,7 @@
                         android:layout_marginBottom="5sp"
                         android:layout_marginLeft="15sp"
                         android:layout_marginRight="15sp"
-                        android:layout_marginTop="5sp">
+                        android:layout_marginTop="5sp" >
 
                         <TextView
                             android:id="@+id/okText"
@@ -78,7 +78,7 @@
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
                             android:padding="10sp"
-                            android:text="Ok"
+                            android:text="OK"
                             android:textColor="@color/colorAccent" />
 
                         <TextView
@@ -107,7 +107,7 @@
                         android:id="@+id/setLocation"
                         android:layout_width="match_parent"
                         android:layout_height="60sp"
-                        android:layout_margin="15dp"
+                        android:layout_margin="15sp"
                         android:backgroundTint="@color/colorAccent"
                         android:text="Set Meeting Location"
                         android:textColor="#FFFFFF" />
@@ -283,9 +283,8 @@
                         android:id="@+id/confirmpayment"
                         android:layout_width="match_parent"
                         android:layout_height="60sp"
-                        android:layout_marginTop="15sp"
+                        android:layout_margin="15sp"
                         android:backgroundTint="@color/colorAccent"
-                        android:onClick="openpayment"
                         android:text="Hire"
                         android:textColor="#FFFFFF" />
 
