@@ -37,312 +37,313 @@
             </RelativeLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/tipCard"
+            <LinearLayout
+                android:id="@+id/tipCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15sp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:layout_marginTop="15sp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tipText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="15sp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15sp"
                     android:layout_marginRight="15sp"
                     android:layout_marginTop="15sp"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:text="Tip: Drag Marker to set meeting location\n        Then click Notify Meeting Location"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginTop="5sp">
 
                     <TextView
-                        android:id="@+id/tipText"
+                        android:id="@+id/okText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="5sp"
+                        android:gravity="center"
+                        android:padding="10sp"
+                        android:text="OK"
+                        android:textColor="@color/colorAccent" />
+
+                    <TextView
+                        android:id="@+id/neverRemindText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/okText"
+                        android:gravity="center"
+                        android:padding="10sp"
+                        android:text="Never Remind Again"
+                        android:textColor="@color/colorAccent" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setLocationCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tipCard"
+                android:background="#FFFFFF"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/setLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="60sp"
+                    android:layout_margin="15sp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="Set Meeting Location"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setDateTimeCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/setLocationCard"
+                android:layout_marginBottom="15sp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:layout_marginTop="15sp"
+                android:background="#FFFFFF"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/dateCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/primaryColor"
+                    android:orientation="vertical"
+                    android:padding="0sp">
+
+                    <TextView
+                        android:id="@+id/day"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginRight="15sp"
-                        android:layout_marginTop="15sp"
-                        android:text="Tip: Drag Marker to set meeting location\n        Then click Notify Meeting Location"
-                        android:textSize="15sp" />
+                        android:gravity="center_horizontal"
+                        android:text="18"
+                        android:textColor="@color/white"
+                        android:textSize="80sp" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/monthYear"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5sp"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginRight="15sp"
-                        android:layout_marginTop="5sp">
+                        android:gravity="center_horizontal"
+                        android:text="July 2015"
+                        android:textColor="@color/coal"
+                        android:textSize="25sp" />
 
-                        <TextView
-                            android:id="@+id/okText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginLeft="5sp"
-                            android:gravity="center"
-                            android:padding="10sp"
-                            android:text="OK"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:id="@+id/neverRemindText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toLeftOf="@+id/okText"
-                            android:gravity="center"
-                            android:padding="10sp"
-                            android:text="Never Remind Again"
-                            android:textColor="@color/colorAccent" />
-
-                    </RelativeLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/setLocationCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/tipCard"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/setLocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="60sp"
-                        android:layout_margin="15sp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:text="Set Meeting Location"
-                        android:textColor="#FFFFFF" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/setTimeCard"
+                <TextView
+                    android:id="@+id/dayOfWeek"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/setLocationCard"
-                    android:layout_marginBottom="15sp"
+                    android:background="@color/coal"
+                    android:padding="10sp"
+                    android:text="Monday"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/timeCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/timeIcon"
+                        android:layout_width="70sp"
+                        android:layout_height="100sp"
+                        android:padding="20sp"
+                        android:src="@color/primaryColorDark" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingBottom="15sp"
+                        android:paddingTop="15sp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5sp"
+                            android:layout_toRightOf="@+id/timeIcon"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="06:30"
+                            android:textColor="@color/coal"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5sp"
+                            android:layout_toRightOf="@+id/timeIcon"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Mon Tue Wed Thu Fri Sat"
+                            android:textColor="@color/primaryColorDark"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/gigCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/setDateTimeCard"
+                android:layout_marginBottom="15sp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:background="#FFFFFF"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/chooseGigText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15sp"
+                    android:text="Choose your gig"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="30sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="15sp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/homeworkAssignment"
+                        android:layout_width="0dp"
+                        android:layout_height="30sp"
+                        android:layout_weight="4"
+                        android:text="Homework Assignment" />
+
+                    <TextView
+                        android:id="@+id/homeworkPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15sp"
                     android:layout_marginRight="15sp"
                     android:layout_marginTop="15sp"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="25sp"
-                        android:background="@color/primaryColor"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:textSize="65sp"
-                            android:textColor="@color/white"
-                            android:text="18"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5sp"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/primaryColorDark"
-                            android:textSize="15sp"
-                            android:text="July 2015"/>
-
-
-                    </LinearLayout>
+                    <CheckBox
+                        android:id="@+id/testReview"
+                        android:layout_width="0dp"
+                        android:layout_height="30sp"
+                        android:layout_weight="4"
+                        android:text="Test/Midterm Review " />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/testReviewPrice"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@color/coal"
-                        android:padding="10sp"
-                        android:textSize="15sp"
-                        android:textColor="@color/white"
-                        android:text="Monday"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white">
-
-                        <ImageView
-                            android:id="@+id/timeIcon"
-                            android:layout_width="70sp"
-                            android:layout_height="100sp"
-                            android:padding="20sp"
-                            android:src="@color/primaryColorDark"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="15sp"
-                            android:paddingBottom="15sp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_weight="3"
-                                android:layout_toRightOf="@+id/timeIcon"
-                                android:layout_marginTop="5sp"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/coal"
-                                android:textSize="30sp"
-                                android:text="06:30"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_weight="2"
-                                android:layout_toRightOf="@+id/timeIcon"
-                                android:layout_marginTop="5sp"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/primaryColorDark"
-                                android:textSize="15sp"
-                                android:text="Mon Tue Wed Thu Fri Sat"/>
-
-                        </LinearLayout>
-
-
-
-
-                    </LinearLayout>
-
-
-
+                        android:layout_weight="1"
+                        android:text="$10" />
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:id="@+id/gigCard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/meetingCard"
-                    android:layout_marginBottom="15sp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15sp"
                     android:layout_marginRight="15sp"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical">
+                    android:layout_marginTop="15sp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/crashCourse"
+                        android:layout_width="0dp"
+                        android:layout_height="30sp"
+                        android:layout_weight="4"
+                        android:text="Crash Course / Final " />
 
                     <TextView
-                        android:id="@+id/chooseGigText"
-                        android:layout_width="match_parent"
+                        android:id="@+id/crashCoursePrice"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15sp"
-                        android:text="Choose your gig"
+                        android:layout_weight="1"
+                        android:text="$10" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginTop="15sp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/totalText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="Total:"
+                        android:textColor="@color/secondaryText"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$44"
                         android:textColor="@color/secondaryText"
                         android:textSize="30sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginRight="15sp"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/homeworkAssignment"
-                            android:layout_width="0dp"
-                            android:layout_height="30sp"
-                            android:layout_weight="4"
-                            android:text="Homework Assignment" />
-
-                        <TextView
-                            android:id="@+id/homeworkPrice"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="$5" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginRight="15sp"
-                        android:layout_marginTop="15sp"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/testReview"
-                            android:layout_width="0dp"
-                            android:layout_height="30sp"
-                            android:layout_weight="4"
-                            android:text="Test/Midterm Review " />
-
-                        <TextView
-                            android:id="@+id/testReviewPrice"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="$10" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginRight="15sp"
-                        android:layout_marginTop="15sp"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/crashCourse"
-                            android:layout_width="0dp"
-                            android:layout_height="30sp"
-                            android:layout_weight="4"
-                            android:text="Crash Course / Final " />
-
-                        <TextView
-                            android:id="@+id/crashCoursePrice"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="$10" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15sp"
-                        android:layout_marginRight="15sp"
-                        android:layout_marginTop="15sp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/totalText"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="Total:"
-                            android:textColor="@color/secondaryText"
-                            android:textSize="25sp" />
-
-                        <TextView
-                            android:id="@+id/total"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="$44"
-                            android:textColor="@color/secondaryText"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <Button
-                        android:id="@+id/confirmpayment"
-                        android:layout_width="match_parent"
-                        android:layout_height="60sp"
-                        android:layout_margin="15sp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:text="Hire"
-                        android:textColor="#FFFFFF" />
-
                 </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/confirmpayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="60sp"
+                    android:layout_margin="15sp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="Hire"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

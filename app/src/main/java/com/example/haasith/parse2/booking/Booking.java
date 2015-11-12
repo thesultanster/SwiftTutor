@@ -1,18 +1,28 @@
 package com.example.haasith.parse2.booking;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.text.DateFormatSymbols;
 
 import com.example.haasith.parse2.R;
 import com.google.android.gms.maps.GoogleMap;
 
 import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /*
@@ -32,7 +42,7 @@ public class Booking extends AppCompatActivity {
     private LinearLayout tipCard;
     private TextView okText;
 
-    // GigCard Variables
+    // Gig Card Variables
     private CheckBox homework;
     private CheckBox test;
     private CheckBox crash;
@@ -45,6 +55,17 @@ public class Booking extends AppCompatActivity {
     private int tutorCrash;
     private int sum = 0;
 
+    // Date Time Card Variable
+    LinearLayout setDateTimeCard;
+    TextView day;
+    TextView monthYear;
+    TextView dayOfWeek;
+    Calendar c = Calendar.getInstance();
+    int startYear = c.get(Calendar.YEAR);
+    int startMonth = c.get(Calendar.MONTH);
+    int startDay = c.get(Calendar.DAY_OF_MONTH);
+    String week;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +74,8 @@ public class Booking extends AppCompatActivity {
         GetExtras();
         InflateVariables();
         SetClickListeners();
+
+        ShowDatePicker();
     }
 
     private void InflateVariables() {
@@ -83,6 +106,12 @@ public class Booking extends AppCompatActivity {
         testPrice.setText("$" + tutorTest);
         crashPrice.setText("$" + tutorCrash);
         total.setText("$" + sum);
+
+        // Date Time Card Variable
+        setDateTimeCard = (LinearLayout) findViewById(R.id.setDateTimeCard);
+        day = (TextView) findViewById(R.id.day);
+        dayOfWeek = (TextView) findViewById(R.id.dayOfWeek);
+        monthYear = (TextView) findViewById(R.id.monthYear);
 
     }
 
@@ -117,6 +146,13 @@ public class Booking extends AppCompatActivity {
             }
         });
 
+        setDateTimeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowDatePicker();
+            }
+        });
+
     }
 
 
@@ -135,8 +171,59 @@ public class Booking extends AppCompatActivity {
     // Used to calculate the Total Sum and Display on UI
     // Called everytime checkbox is checked / unchecked
     private void setTotalText(boolean isChecked, int price) {
-        if (isChecked) { sum += price; } else { sum -= price; }
+        if (isChecked) {
+            sum += price;
+        } else {
+            sum -= price;
+        }
         total.setText("$" + sum);
     }
 
+
+    void ShowDatePicker(){
+        DialogFragment dialogFragment = new StartDatePicker();
+        dialogFragment.show(getSupportFragmentManager(), "start_date_picker");
+    }
+
+
+
+    // DatePicker Class
+    class StartDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // TODO Auto-generated method stub
+            // Use the current date as the default date in the picker
+            DatePickerDialog dialog = new DatePickerDialog(Booking.this, this, startYear, startMonth, startDay);
+            return dialog;
+
+        }
+
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            // Do something with the date chosen by the user
+            startYear = year;
+            startMonth = monthOfYear;
+            startDay = dayOfMonth;
+
+            SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+            Date date = new Date(startYear, startMonth, startDay-1);
+            week = simpledateformat.format(date);
+
+            updateDateTimeCard();
+
+            Log.d("date", String.valueOf(startDay));
+
+        }
+    }
+
+    void updateDateTimeCard(){
+        day.setText(startDay+"");
+        dayOfWeek.setText(week);
+        monthYear.setText(new DateFormatSymbols().getMonths()[startMonth] + ", " + startYear);
+    }
+
+
 }
+
+
