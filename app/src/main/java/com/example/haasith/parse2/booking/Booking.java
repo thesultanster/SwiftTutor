@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 
 import com.example.haasith.parse2.R;
@@ -58,8 +59,7 @@ public class Booking extends AppCompatActivity {
     private int tutorCrash;
     private int sum = 0;
 
-    // Date Time Card Variable
-    LinearLayout timeCard;
+    // Date Card Variables
     LinearLayout dateCard;
     TextView day;
     TextView monthYear;
@@ -70,6 +70,10 @@ public class Booking extends AppCompatActivity {
     int startDay = c.get(Calendar.DAY_OF_MONTH);
     String week;
 
+    // Time Card Variables
+    LinearLayout timeCard;
+    TextView time;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,27 @@ public class Booking extends AppCompatActivity {
         GetExtras();
         InflateVariables();
         SetClickListeners();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd");
+        Date date = new Date();
+        day.setText(dateFormat.format(date) + "");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        dayOfWeek.setText(sdf.format(d));
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+
+        dateFormat = new SimpleDateFormat("MM");
+        date = new Date();
+        monthYear.setText(new DateFormatSymbols().getMonths()[Integer.parseInt(dateFormat.format(date))-1] + ", " + year);
+
+
+        dateFormat = new SimpleDateFormat("hh:mm a");
+        time.setText(dateFormat.format(new Date()));
+
+
     }
 
     private void InflateVariables() {
@@ -109,12 +134,17 @@ public class Booking extends AppCompatActivity {
         crashPrice.setText("$" + tutorCrash);
         total.setText("$" + sum);
 
-        // Date Time Card Variable
-        timeCard = (LinearLayout) findViewById(R.id.timeCard);
+        // Date Card Variable
         dateCard = (LinearLayout) findViewById(R.id.dateCard);
         day = (TextView) findViewById(R.id.day);
         dayOfWeek = (TextView) findViewById(R.id.dayOfWeek);
         monthYear = (TextView) findViewById(R.id.monthYear);
+
+        // Time Card Variable
+        timeCard = (LinearLayout) findViewById(R.id.timeCard);
+        time = (TextView) findViewById(R.id.time);
+
+        timeCard.setVisibility(View.GONE);
 
     }
 
@@ -152,14 +182,14 @@ public class Booking extends AppCompatActivity {
         timeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDatePicker();
+                ShowTimePicker();
             }
         });
 
         dateCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowTimePicker();
+                ShowDatePicker();
             }
         });
 
@@ -191,42 +221,38 @@ public class Booking extends AppCompatActivity {
     }
 
 
-    void ShowDatePicker(){
+    void ShowDatePicker() {
         DialogFragment dialogFragment = new StartDatePicker();
         dialogFragment.show(getSupportFragmentManager(), "start_date_picker");
     }
 
-    void ShowTimePicker(){
+    void ShowTimePicker() {
         DialogFragment dialogFragment = new TimePicker();
         dialogFragment.show(getSupportFragmentManager(), "start_time_picker");
     }
-
 
 
     // DatePicker Class
     class StartDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // TODO Auto-generated method stub
             // Use the current date as the default date in the picker
             DatePickerDialog dialog = new DatePickerDialog(Booking.this, this, startYear, startMonth, startDay);
             return dialog;
 
         }
 
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            // TODO Auto-generated method stub
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             // Do something with the date chosen by the user
             startYear = year;
             startMonth = monthOfYear;
             startDay = dayOfMonth;
 
             SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
-            Date date = new Date(startYear, startMonth, startDay-1);
+            Date date = new Date(startYear, startMonth, startDay - 1);
             week = simpledateformat.format(date);
 
-            updateDateTimeCard();
+            updateDateCard();
 
             Log.d("date", String.valueOf(startDay));
 
@@ -246,22 +272,44 @@ public class Booking extends AppCompatActivity {
         @Override
         public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
 
+            setDate(hourOfDay, minute);
+
+
+        }
+
+
+    }
+
+    void setDate( int hour, int minute){
+        String am_pm = "";
+
+        Calendar datetime = Calendar.getInstance();
+        datetime.set(Calendar.HOUR_OF_DAY, hour);
+        datetime.set(Calendar.MINUTE, minute);
+
+        if (datetime.get(Calendar.AM_PM) == Calendar.AM)
+            am_pm = "AM";
+        else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
+            am_pm = "PM";
+
+        if (hour > 12) {
+            hour -= 12;
+
+            time.setText(hour + ":" + minute + am_pm);
         }
     }
 
-    void updateDateTimeCard(){
-        day.setText(startDay+"");
+    void updateDateCard() {
+        day.setText(startDay + "");
         dayOfWeek.setText(week);
         monthYear.setText(new DateFormatSymbols().getMonths()[startMonth] + ", " + startYear);
     }
 
-    void updateTimeCard(){
-        day.setText(startDay+"");
+    void updateTimeCard() {
+        day.setText(startDay + "");
         dayOfWeek.setText(week);
         monthYear.setText(new DateFormatSymbols().getMonths()[startMonth] + ", " + startYear);
     }
-
-
 }
 
 
