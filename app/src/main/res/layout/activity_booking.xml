@@ -172,7 +172,7 @@
                     <ImageView
                         android:id="@+id/timeIcon"
                         android:layout_width="70sp"
-                        android:layout_height="100sp"
+                        android:layout_height="match_parent"
                         android:padding="20sp"
                         android:src="@color/primaryColorDark" />
 
@@ -188,22 +188,11 @@
                             android:layout_height="0dp"
                             android:layout_marginTop="5sp"
                             android:layout_toRightOf="@+id/timeIcon"
-                            android:layout_weight="3"
+                            android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="06:30"
                             android:textColor="@color/coal"
                             android:textSize="30sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="5sp"
-                            android:layout_toRightOf="@+id/timeIcon"
-                            android:layout_weight="2"
-                            android:gravity="center_vertical"
-                            android:text="Mon Tue Wed Thu Fri Sat"
-                            android:textColor="@color/primaryColorDark"
-                            android:textSize="15sp" />
 
                     </LinearLayout>
 

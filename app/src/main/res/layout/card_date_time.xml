@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setDateTimeCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/setLocationCard"
+    android:layout_marginBottom="15sp"
+    android:layout_marginLeft="15sp"
+    android:layout_marginRight="15sp"
+    android:layout_marginTop="15sp"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/dateCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryColor"
+        android:orientation="vertical"
+        android:padding="0sp">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="18"
+            android:textColor="@color/white"
+            android:textSize="80sp" />
+
+        <TextView
+            android:id="@+id/monthYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5sp"
+            android:gravity="center_horizontal"
+            android:text="July 2015"
+            android:textColor="@color/coal"
+            android:textSize="25sp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dayOfWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/coal"
+        android:padding="10sp"
+        android:text="Monday"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/timeCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/timeIcon"
+            android:layout_width="70sp"
+            android:layout_height="100sp"
+            android:padding="20sp"
+            android:src="@color/primaryColorDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="15sp"
+            android:paddingTop="15sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="5sp"
+                android:layout_toRightOf="@+id/timeIcon"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="06:30"
+                android:textColor="@color/coal"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="5sp"
+                android:layout_toRightOf="@+id/timeIcon"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:text="Mon Tue Wed Thu Fri Sat"
+                android:textColor="@color/primaryColorDark"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
