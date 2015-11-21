@@ -87,13 +87,15 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
         if (view.getId() == R.id.cancel) {
             dismiss();
         } else if (view.getId() == R.id.yes) {
-            chargeCard();
+            //chargeCard();
         } else if (view.getId() == R.id.editBooking) {
             Intent intent = new Intent(getActivity(),Booking.class);
             startActivity(intent);
         }
 
     }
+
+
 
     private void chargeCard() {
         new AsyncTask<Void, Void, Void>() {

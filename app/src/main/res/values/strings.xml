@@ -9,6 +9,14 @@
     <string name="open">open</string>
     <string name="close">close</string>
 
+    <string name="btnConnectText">Connect with Stripe</string>
+    <string name="btnDisconnectText">Disconnect from Stripe</string>
+
+    <string name="btnDialogYes">Yes</string>
+    <string name="btnDialogNo">No</string>
+
+    <string name="dialogDisconnectText">Disconnect from Stripe?</string>
+
     <string name="parse_app_id">YOUR_PARSE_APP_ID</string>
     <string name="parse_client_id">YOUR_PARSE_CLIENT_ID</string>
 

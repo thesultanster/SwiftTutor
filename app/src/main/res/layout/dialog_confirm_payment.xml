@@ -74,7 +74,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="15sp"
-                android:text="Current Location" />
+                android:text="Location: Current Location" />
 
         </LinearLayout>
 
@@ -101,7 +101,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="15sp"
-                android:text="Right Now" />
+                android:text="Time: Right Now" />
 
         </LinearLayout>
 <!--
