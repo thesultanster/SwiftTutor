@@ -83,6 +83,12 @@ public class Booking extends AppCompatActivity {
         InflateVariables();
         SetClickListeners();
 
+        SetCurrentTimeAndDate();
+        SetTimeAsCurrentTime();
+
+    }
+
+    void SetCurrentTimeAndDate(){
         DateFormat dateFormat = new SimpleDateFormat("dd");
         Date date = new Date();
         day.setText(dateFormat.format(date) + "");
@@ -101,8 +107,11 @@ public class Booking extends AppCompatActivity {
 
         dateFormat = new SimpleDateFormat("hh:mm a");
         time.setText(dateFormat.format(new Date()));
+    }
 
-
+    void SetTimeAsCurrentTime(){
+        time.setText("Right Now");
+        timeCard.setOnClickListener(null);
     }
 
     private void InflateVariables() {
@@ -144,7 +153,7 @@ public class Booking extends AppCompatActivity {
         timeCard = (LinearLayout) findViewById(R.id.timeCard);
         time = (TextView) findViewById(R.id.time);
 
-        timeCard.setVisibility(View.GONE);
+        //timeCard.setVisibility(View.GONE);
 
     }
 
@@ -273,7 +282,6 @@ public class Booking extends AppCompatActivity {
         public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
 
             setDate(hourOfDay, minute);
-
 
         }
 
