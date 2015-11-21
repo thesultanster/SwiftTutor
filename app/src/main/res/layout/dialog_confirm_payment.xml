@@ -2,38 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="24dp"
         android:orientation="vertical">
-
-        <com.devmarvel.creditcardentry.library.CreditCardForm
-            android:id="@+id/credit_card_form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:include_helper="false"
-            app:include_zip="false"/>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+           >
 
             <TextView
-                android:id="@+id/totalText"
+                android:id="@+id/gigType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:textSize="30sp"
                 android:textColor="@color/secondaryText"
-                android:text="Total"
+                android:text="Homework"
                 />
 
             <TextView
@@ -46,6 +39,69 @@
                 android:textColor="@color/secondaryText"
                 android:text="$44"
                 />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/paymentType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/secondaryText"
+            android:text="Visa XXXX-3090"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="1sp"
+            android:layout_marginTop="10sp"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/locationIcon"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:padding="5dp"
+                android:src="@color/primaryColorDark" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15sp"
+                android:text="Current Location" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="1sp"
+            android:layout_marginTop="5sp"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/timeIcon"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:padding="5dp"
+                android:src="@color/primaryColorDark" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15sp"
+                android:text="Right Now" />
 
         </LinearLayout>
 <!--
@@ -109,13 +165,33 @@
         <TextView
             android:id="@+id/yes"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorAccent"
+            android:textColor="@color/cloud"
+            android:textSize="20sp"
+            android:text="Confirm" />
+
+        <TextView
+            android:id="@+id/editBooking"
+            android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:padding="4dp"
-            android:layout_margin="20dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toLeftOf="@+id/yes"
             android:textColor="@color/colorAccent"
             android:textSize="20dp"
-            android:text="Hire" />
+            android:text="Edit" />
 
         <TextView
             android:id="@+id/cancel"
@@ -123,7 +199,7 @@
             android:layout_height="36dp"
             android:padding="4dp"
             android:layout_margin="20dp"
-            android:layout_toLeftOf="@+id/yes"
+            android:layout_toLeftOf="@+id/editBooking"
             android:textColor="@color/colorAccent"
             android:textSize="20dp"
             android:text="Cancel" />
