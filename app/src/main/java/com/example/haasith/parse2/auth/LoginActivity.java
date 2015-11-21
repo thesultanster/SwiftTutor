@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.example.haasith.parse2.stripe_connect.ApplicationData;
+import com.example.haasith.parse2.stripe_connect.StripeApp;
+import com.example.haasith.parse2.stripe_connect.StripeButton;
+import com.example.haasith.parse2.stripe_connect.StripeConnectListener;
 import com.moxtra.sdk.MXAccountManager;
 import com.moxtra.sdk.MXChatManager;
 import com.moxtra.sdk.MXSDKConfig;
@@ -18,6 +23,7 @@ import com.moxtra.sdk.MXSDKException;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.stripe.Stripe;
 
 //com.facebook.FacebookSdk
 
@@ -27,15 +33,44 @@ public class LoginActivity extends Activity  {
     private EditText passwordView;
     private static final String TAG = "MoxieChatApplication";
 
+    StripeApp mApp;
+    StripeButton mStripeButton;
+    private TextView tvSummary;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
 
+        tvSummary = (TextView) findViewById(R.id.tvSummary);
+
+         mApp = new StripeApp(this, "TestGuy", ApplicationData.CLIENT_ID,
+                ApplicationData.SECRET_KEY, ApplicationData.CALLBACK_URL);
+
+        mStripeButton = (StripeButton) findViewById(R.id.btnStripeConnect);
+        mStripeButton.setStripeApp(mApp);
+        mStripeButton.addStripeConnectListener(new StripeConnectListener() {
+
+            @Override
+            public void onConnected() {
+                tvSummary.setText("Connected as " + mApp.getAccessToken());
+            }
+
+            @Override
+            public void onDisconnected() {
+                tvSummary.setText("Disconnected");
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
 
-
+        Stripe.apiKey = mApp.getAccessToken();
 
 
 
@@ -112,7 +147,19 @@ public class LoginActivity extends Activity  {
     }
 
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        switch(resultCode) {
+            case StripeApp.RESULT_CONNECTED:
+                tvSummary.setText("Connected as " + mApp.getAccessToken());
+                break;
+            case StripeApp.RESULT_ERROR:
+                String error_description = data.getStringExtra("error_description");
+                Toast.makeText(LoginActivity.this, error_description, Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+    }
 
 
 }

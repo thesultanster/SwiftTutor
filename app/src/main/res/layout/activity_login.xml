@@ -4,6 +4,21 @@
     style="@style/LoginFormContainer"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Not connected"
+        android:gravity="center_horizontal"
+        />
+
+    <com.example.haasith.parse2.stripe_connect.StripeButton
+        android:id="@+id/btnStripeConnect"
+        android:layout_height="wrap_content"
+        android:layout_width="200dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"/>
+
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"

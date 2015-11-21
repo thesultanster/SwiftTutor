@@ -117,20 +117,28 @@ public class StripeDialog extends Dialog {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			AppLog.d(TAG, "OAuthWebViewClient.shouldOverrideUrlLoading", "Redirecting URL " + url);
 
-			if (url.startsWith(mCallbackUrl)) {
+			if (url.startsWith("https://stripe.com/connect/default/oauth/test?")) {
 				
-				String queryString = url.replace(mCallbackUrl + "/?", "");
+				String queryString = url.replace("https://stripe.com/connect/default/oauth/test?", "");
 				AppLog.d(TAG, "OAuthWebViewClient.shouldOverrideUrlLoading", "queryString:" + queryString);
+
 				Map<String, String> parameters = StripeUtils.splitQuery(queryString);
+
 				if(!url.contains("error")) {
+					AppLog.d(TAG, "OAuthWebViewClient.shouldOverrideUrlLoading", "not contains error:" + queryString);
+
 					mListener.onComplete(parameters);
 				}
 				else {
+					AppLog.d(TAG, "OAuthWebViewClient.shouldOverrideUrlLoading", "contains error:" + queryString);
+
 					mListener.onError(parameters);
 				}
 				StripeDialog.this.dismiss();
 				return true;
+
 			}
+
 			return false;
 		}
 
