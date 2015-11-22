@@ -9,13 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.haasith.parse2.ApplicationData;
 import com.example.haasith.parse2.MyActivity;
 import com.example.haasith.parse2.R;
+import com.example.haasith.parse2.stripe_connect.StripeApp;
+import com.example.haasith.parse2.stripe_connect.StripeButton;
+import com.example.haasith.parse2.stripe_connect.StripeConnectListener;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.stripe.Stripe;
 
 /**
  * Created by haasith on 7/8/15.
@@ -34,6 +40,13 @@ public class SignUpActivity extends Activity {
     private ImageView profilepic;
     private Button uploadimage;
     private Bitmap picture;
+
+    StripeApp mApp;
+    StripeButton mStripeButton;
+    private TextView tvSummary;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -49,10 +62,7 @@ public class SignUpActivity extends Activity {
         subjectone = (EditText) findViewById(R.id.subject1);
         college = (EditText) findViewById(R.id.college);
         degree = (EditText) findViewById(R.id.degree);
-        profilepic = (ImageView) findViewById(R.id.profilepic);
-        uploadimage = (Button) findViewById(R.id.uploadimage);
-        //profilepic.setOnClickListener(this);
-        //uploadimage.setOnClickListener(this);
+
         // Set up the submit button click handler
         findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -110,6 +120,9 @@ public class SignUpActivity extends Activity {
                 dlg.setMessage("Signing up.  Please wait.");
                 dlg.show();
 
+
+                StripeSignUp();
+
                 // Set up a new Parse user
                 ParseUser user = new ParseUser();
                 user.setUsername(usernameView.getText().toString());
@@ -120,7 +133,9 @@ public class SignUpActivity extends Activity {
                 user.put("subject1", subjectone.getText().toString());
                 user.put("college", college.getText().toString());
                 user.put("degree", degree.getText().toString());
-                user.put("rating", 4.0);
+                user.put("rating", 0.0);
+                user.put("stripeAccountId", mApp.getStripeSession().getUserId());
+
 
 
                 user.signUpInBackground(new SignUpCallback() {
@@ -141,6 +156,10 @@ public class SignUpActivity extends Activity {
                 });
             }
         });
+
+
+
+
     }
 
     private boolean isEmpty(EditText etText) {
@@ -157,6 +176,52 @@ public class SignUpActivity extends Activity {
         } else {
             return false;
         }
+    }
+
+
+    void StripeSignUp(){
+        tvSummary = (TextView) findViewById(R.id.tvSummary);
+
+        mApp = new StripeApp(this, "TestGuy", ApplicationData.CLIENT_ID,
+                ApplicationData.SECRET_KEY, ApplicationData.CALLBACK_URL);
+
+        mStripeButton = (StripeButton) findViewById(R.id.btnStripeConnect);
+        mStripeButton.setStripeApp(mApp);
+        mStripeButton.addStripeConnectListener(new StripeConnectListener() {
+
+            @Override
+            public void onConnected() {
+                tvSummary.setText("Connected as " + mApp.getAccessToken());
+
+            }
+
+            @Override
+            public void onDisconnected() {
+                tvSummary.setText("Disconnected");
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(SignUpActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        Stripe.apiKey = mApp.getAccessToken();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch(resultCode) {
+            case StripeApp.RESULT_CONNECTED:
+                tvSummary.setText("Connected as " + mApp.getAccessToken());
+                break;
+            case StripeApp.RESULT_ERROR:
+                String error_description = data.getStringExtra("error_description");
+                Toast.makeText(SignUpActivity.this, error_description, Toast.LENGTH_SHORT).show();
+                break;
+        }
+
     }
 }
 

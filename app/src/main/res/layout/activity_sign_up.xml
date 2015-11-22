@@ -8,14 +8,20 @@
         style="@style/LoginFormContainer"
         android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:id="@+id/profilepic" />
-        <Button
-            android:layout_width="100sp"
-            android:layout_height="30sp"
-            android:id="@+id/uploadimage"/>
+        <TextView
+            android:id="@+id/tvSummary"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Not connected"
+            android:gravity="center_horizontal"
+            />
+
+        <com.example.haasith.parse2.stripe_connect.StripeButton
+            android:id="@+id/btnStripeConnect"
+            android:layout_height="wrap_content"
+            android:layout_width="200dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dip"/>
 
         <EditText
             android:id="@+id/email"

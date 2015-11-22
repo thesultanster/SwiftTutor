@@ -29,65 +29,13 @@ public class LoginActivity extends Activity  {
     private EditText passwordView;
     private static final String TAG = "MoxieChatApplication";
 
-    StripeApp mApp;
-    StripeButton mStripeButton;
-    private TextView tvSummary;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
 
-        tvSummary = (TextView) findViewById(R.id.tvSummary);
 
-        mApp = new StripeApp(this, "TestGuy", ApplicationData.CLIENT_ID,
-                ApplicationData.SECRET_KEY, ApplicationData.CALLBACK_URL);
-
-        mStripeButton = (StripeButton) findViewById(R.id.btnStripeConnect);
-        mStripeButton.setStripeApp(mApp);
-        mStripeButton.addStripeConnectListener(new StripeConnectListener() {
-
-            @Override
-            public void onConnected() {
-                tvSummary.setText("Connected as " + mApp.getAccessToken());
-
-                /*
-                URL url = new URL("https://api.stripe.com/v1/charges");
-                String urlParameters = "code=" + code
-                        + "&client_secret=" + mSecretKey
-                        + "&grant_type=authorization_code";
-                AppLog.i(TAG, "getAccessToken", "Getting access token with code:" + code);
-                AppLog.i(TAG, "getAccessToken", "Opening URL " + url.toString() + "?" + urlParameters);
-
-                String response = StripeUtils.executePost(TOKEN_URL, urlParameters);
-                JSONObject obj = new JSONObject(response);
-
-                AppLog.i(TAG, "getAccessToken", "String data[access_token]:			" + obj.getString("access_token"));
-                AppLog.i(TAG, "getAccessToken", "String data[livemode]:				" + obj.getBoolean("livemode"));
-                AppLog.i(TAG, "getAccessToken", "String data[refresh_token]:			" + obj.getString("refresh_token"));
-                AppLog.i(TAG, "getAccessToken", "String data[token_type]:			" + obj.getString("token_type"));
-                AppLog.i(TAG, "getAccessToken", "String data[stripe_publishable_key]: " + obj.getString("stripe_publishable_key"));
-                AppLog.i(TAG, "getAccessToken", "String data[stripe_user_id]:		" + obj.getString("stripe_user_id"));
-                AppLog.i(TAG, "getAccessToken", "String data[scope]:					" + obj.getString("scope"));
-                */
-
-            }
-
-            @Override
-            public void onDisconnected() {
-                tvSummary.setText("Disconnected");
-            }
-
-            @Override
-            public void onError(String error) {
-                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-
-        Stripe.apiKey = mApp.getAccessToken();
 
 
 
@@ -164,19 +112,7 @@ public class LoginActivity extends Activity  {
     }
 
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        switch(resultCode) {
-            case StripeApp.RESULT_CONNECTED:
-                tvSummary.setText("Connected as " + mApp.getAccessToken());
-                break;
-            case StripeApp.RESULT_ERROR:
-                String error_description = data.getStringExtra("error_description");
-                Toast.makeText(LoginActivity.this, error_description, Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-    }
 
 
 }
