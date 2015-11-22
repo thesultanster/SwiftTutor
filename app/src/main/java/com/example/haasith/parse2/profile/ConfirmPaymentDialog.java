@@ -46,6 +46,7 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
     TextView yes;
     TextView editBooking;
     TextView total;
+    TextView paymentType;
     ConfirmPaymentCommunicator communicator;
     int sum;
 
@@ -74,12 +75,23 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
         getDialog().setTitle("Confirm Payment");
         cancel = (TextView) view.findViewById(R.id.cancel);
         yes = (TextView) view.findViewById(R.id.yes);
+        paymentType = (TextView) view.findViewById(R.id.paymentType);
         editBooking = (TextView) view.findViewById(R.id.editBooking);
         total = (TextView) view.findViewById(R.id.total);
         form = (CreditCardForm) view.findViewById(R.id.credit_card_form);
 
-        sum = getArguments().getInt("sum")*100;
-        total.setText("$" + String.valueOf(sum/100));
+        if (ParseUser.getCurrentUser().getString("customerId") == null) {
+            paymentType.setVisibility(View.GONE);
+        } else if (ParseUser.getCurrentUser().getString("customerId").equals("")) {
+            paymentType.setVisibility(View.GONE);
+        } else {
+            paymentType.setText("Visa XXXX-" + ParseUser.getCurrentUser().getString("last4Digits") );
+            form.setVisibility(View.GONE);
+
+        }
+
+        sum = getArguments().getInt("sum") * 100;
+        total.setText("$" + String.valueOf(sum / 100));
 
 
         //price   = (EditText) view.findViewById(R.id.price);
@@ -118,45 +130,47 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
 
                 // If Id exists then do payment it
                 if (customerId != null) {
+                    if (!customerId.equals("")) {
 
-                    Log.d("stripe customerId exists", customerId);
+                        Log.d("stripe custmerId exists", customerId);
 
-                    final Map<String, Object> chargeParams = new HashMap<String, Object>();
-                    chargeParams.put("amount", sum);
-                    chargeParams.put("currency", "usd");
-                    chargeParams.put("customer", customerId);
-                    chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
-                    chargeParams.put("application_fee", 200);
+                        final Map<String, Object> chargeParams = new HashMap<String, Object>();
+                        chargeParams.put("amount", sum);
+                        chargeParams.put("currency", "usd");
+                        chargeParams.put("customer", customerId);
+                        chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
+                        chargeParams.put("application_fee", (long) Math.floor(sum * 0.20 + 0.5d));
 
-                    new AsyncTask<Void, Void, Void>() {
+                        new AsyncTask<Void, Void, Void>() {
 
-                        Charge charge;
+                            Charge charge;
 
 
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                com.stripe.Stripe.apiKey = "sk_test_n8kyFez68piLJbbIOW7WW9yo";
-                                charge = Charge.create(chargeParams);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                try {
+                                    com.stripe.Stripe.apiKey = ApplicationData.SECRET_KEY;
+                                    charge = Charge.create(chargeParams);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
                             }
-                            return null;
-                        }
 
-                        protected void onPostExecute(Void result) {
-                            //Log.d("stripe charge info","Card Charged : " + charge.getCreated() + "\nPaid : " + charge.getPaid() );
-                        }
+                            protected void onPostExecute(Void result) {
+                                //Log.d("stripe charge info","Card Charged : " + charge.getCreated() + "\nPaid : " + charge.getPaid() );
+                            }
 
-                    }.execute();
+                        }.execute();
 
-                    dismiss();
-                    communicator.onDialogPayment();
+                        dismiss();
+                        communicator.onDialogPayment();
+                    }
                 }
 
 
                 CreditCard creditCard = form.getCreditCard();
-                Card card = new Card(creditCard.getCardNumber(), creditCard.getExpMonth(), creditCard.getExpYear(), creditCard.getSecurityCode());
+                final Card card = new Card(creditCard.getCardNumber(), creditCard.getExpMonth(), creditCard.getExpYear(), creditCard.getSecurityCode());
 
                 final Map<String, Object> defaultCardParams = new HashMap<String, Object>();
                 defaultCardParams.put("number", creditCard.getCardNumber());
@@ -209,7 +223,9 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
                                                 customerId = customer.getId();
                                                 Log.d("stripe after customerId", customerId);
 
+
                                                 ParseUser.getCurrentUser().put("customerId", customerId);
+                                                ParseUser.getCurrentUser().put("last4Digits", card.getLast4());
                                                 ParseUser.getCurrentUser().saveInBackground();
 
                                                 Log.d("stripe onsuccess", token.toString());
@@ -218,7 +234,7 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
                                                 chargeParams.put("currency", "usd");
                                                 chargeParams.put("customer", customerId);
                                                 chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
-                                                chargeParams.put("application_fee", sum*0.20);
+                                                chargeParams.put("application_fee", (long) Math.floor(sum * 0.20 + 0.5d));
 
                                                 //chargeParams.put("card", token.getId()); //Token obtained in onSuccess() TokenCallback method of
 
