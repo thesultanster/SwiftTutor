@@ -209,7 +209,6 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         session.put("tutorAccepted", false);
         session.put("tutorRejected", false);
         session.put("meetingId", "0");
-        session.put("meetClientLocation" , "NA");
         // TODO: This is defaulted to inPerson
         session.put("sessionType", "inPerson");
         session.saveInBackground(new SaveCallback() {
@@ -227,7 +226,7 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
                 editor.apply();
 
 
-                Intent intent = new Intent(getApplicationContext(), Booking.class);
+                Intent intent = new Intent(getApplicationContext(), CurrentSession.class);
                 intent.putExtra("tutorHomework", tutorHomeowrk);
                 intent.putExtra("tutorTest", tutorTest);
                 intent.putExtra("tutorCrash",tutorCrash);
