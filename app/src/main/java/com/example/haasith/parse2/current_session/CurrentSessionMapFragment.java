@@ -1,23 +1,22 @@
-package com.example.haasith.parse2.booking;
+package com.example.haasith.parse2.current_session;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.SupportMapFragment;
 
 /*
     In this class, we intercept the touch event by using TouchableWrapper class .
     There is also a custom listener OnTouchListener to dispatch the touch event to the activity
-    Booking that handles the map. When touch event occured, dispatchTouchEvent will be called and
+    current session that handles the map. When touch event occured, dispatchTouchEvent will be called and
     the listener mListener will handle it.
  */
-public class BookingMapFragment extends SupportMapFragment {
+public class CurrentSessionMapFragment extends SupportMapFragment {
 
     private OnTouchListener mListener;
 

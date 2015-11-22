@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.example.haasith.parse2.find_tutor.TutorListRecyclerInfo;
 import com.example.haasith.parse2.util.NavigationDrawerFramework;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,11 +37,15 @@ import com.moxtra.sdk.MXAccountManager;
 import com.moxtra.sdk.MXChatManager;
 import com.moxtra.sdk.MXSDKConfig;
 import com.moxtra.sdk.MXSDKException;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 public class CurrentSession extends AppCompatActivity implements FinishUserSessionCommunicator, OnMapReadyCallback {
 
@@ -61,8 +67,10 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     ParseObject session;
     Handler mHandler;
 
-    MapFragment mapFragment;
+    NestedScrollView mScrollView;
     Marker marker;
+    GoogleMap mMap;
+    Boolean moveCamera = true;
 
 
     private static final String TAG = "MoxieChatApplication";
@@ -94,7 +102,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         */
 
         // If No Session Exists
-        if(sessionId.equals("NOT_DEFINED")){
+        if (sessionId.equals("NOT_DEFINED")) {
             StartNullSession();
         } else {
             StartParseListenerThread();
@@ -103,21 +111,42 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
         // If client
         if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
-
         }
         // If tutor
         else {
 
+            UpdateClientMarker();
+
         }
-
-
-
 
 
     }
 
+    void UpdateClientMarker() {
+        // Get Client Location
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("objectId", clientId);
+        query.findInBackground(new FindCallback<ParseUser>() {
+
+
+            public void done(List<ParseUser> users, ParseException e) {
+                if (e == null) {
+                    ParseGeoPoint pPoint = users.get(0).getParseGeoPoint("location");
+                    LatLng loc = new LatLng(pPoint.getLatitude(), pPoint.getLongitude());
+                    mMap.clear();
+                    Marker mMarker = mMap.addMarker(new MarkerOptions().position(loc).draggable(false).title("Meet Client Here"));
+
+                } else {
+                    Log.d("Currsesh user loc", "Error: " + e.getMessage());
+                }
+            }
+
+
+        });
+    }
+
     //TODO: Delete this
-    void StartInPersonSession(){
+    void StartInPersonSession() {
 
         inPersonMeetingCard.setVisibility(View.VISIBLE);
         meetingCard.setVisibility(View.GONE);
@@ -125,7 +154,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
     }
 
-    void StartNullSession(){
+    void StartNullSession() {
 
         meetingCard.setVisibility(View.GONE);
         nullMeetingCard.setVisibility(View.VISIBLE);
@@ -135,7 +164,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
     }
 
-    void GetSharedPreferences(){
+    void GetSharedPreferences() {
 
         SharedPreferences prefs = getSharedPreferences("CurrentSessionDetails", MODE_PRIVATE);
 
@@ -155,7 +184,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
     }
 
-    void InflateVariables(){
+    void InflateVariables() {
         finishSession = (Button) findViewById(R.id.finishButton);
         findTutorButton = (Button) findViewById(R.id.findTutorButton);
         setLocation = (Button) findViewById(R.id.setLocation);
@@ -165,11 +194,19 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         moxtraState = (TextView) findViewById(R.id.moxtraState);
         meetingCard = (LinearLayout) findViewById(R.id.meetingCard);
         nullMeetingCard = (LinearLayout) findViewById(R.id.nullMeetingCard);
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mMap = ((CurrentSessionMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        ((CurrentSessionMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
+        mScrollView = (NestedScrollView) findViewById(R.id.scrollView);
+        ((CurrentSessionMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).setListener(new CurrentSessionMapFragment.OnTouchListener() {
+            @Override
+            public void onTouch() {
+                mScrollView.requestDisallowInterceptTouchEvent(true);
+            }
+        });
+
     }
 
-    void SetClickListeners(){
+    void SetClickListeners() {
 
         finishSession.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +264,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
     }
 
-    void StartParseListenerThread(){
+    void StartParseListenerThread() {
 
         meetingCard.setVisibility(View.VISIBLE);
         nullMeetingCard.setVisibility(View.GONE);
@@ -240,7 +277,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(4000);
+                        Thread.sleep(8000);
                         mHandler.post(new Runnable() {
 
                             @Override
@@ -255,55 +292,60 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         }).start();
 
 
-
     }
 
     void UpdateState() {
 
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("TutorSession");
-            query.getInBackground(sessionId, new GetCallback<ParseObject>() {
-                public void done(ParseObject object, ParseException e) {
-                    if (e == null) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("TutorSession");
+        query.getInBackground(sessionId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
 
-                        session = object;
+                    session = object;
 
-                        // If Client
-                        if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
+                    // If Client
+                    if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
 
-                            // Check Acceptance Status
-                            if (session.get("tutorAccepted") == false) {
-                                state.setText("Request Not Accepted");
-                            } else {
-                                state.setText("Connected to Tutor");
-                            }
+                        // Check Acceptance Status
+                        if (session.get("tutorAccepted") == false) {
+                            state.setText("Request Not Accepted");
+                        } else {
+                            state.setText("Connected to Tutor");
+                        }
 
-                            // Check Rejection Status
-                            if (session.get("tutorRejected") == true) {
-                                state.setText("Offer Rejected");
-                                moxtra.setVisibility(View.GONE);
-                            }
+                        // Check Rejection Status
+                        if (session.get("tutorRejected") == true) {
+                            state.setText("Offer Rejected");
+                            moxtra.setVisibility(View.GONE);
+                        }
 
-                            // If tutor finished session
-                            if(session.get("tutorRelease") == true){
-                                state.setText("Tutor Left the Session");
-                                moxtra.setVisibility(View.INVISIBLE);
-                            }
+                        // If tutor finished session
+                        if (session.get("tutorRelease") == true) {
+                            state.setText("Tutor Left the Session");
+                            moxtra.setVisibility(View.INVISIBLE);
+                        }
 
-                            if(session.get("sessionType").toString().equals("inPerson")){
-
-                            }
-
+                        if (session.get("sessionType").toString().equals("inPerson")) {
 
                         }
-                        // If Tutor
-                        else {
-                            state.setText("Connected to Client");
 
-                            // If client finished session
-                            if(session.get("clientRelease") == true){
-                                state.setText("Client Left the Session");
-                            }
+                        // Get Tutor Location
+                        if (session.get("tutorLocation") != null) {
 
+                            LatLng loc = new LatLng(session.getParseGeoPoint("tutorLocation").getLatitude(), session.getParseGeoPoint("tutorLocation").getLongitude());
+                            mMap.clear();
+                            Marker mMarker = mMap.addMarker(new MarkerOptions().position(loc).draggable(false).title("Tutor Location"));
+                        }
+
+
+                    }
+                    // If Tutor
+                    else {
+                        state.setText("Connected to Client");
+
+                        // If client finished session
+                        if (session.get("clientRelease") == true) {
+                            state.setText("Client Left the Session");
                         }
 
 
@@ -311,14 +353,18 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                         if (!session.getString("meetingId").equals("0")) {
                             moxtraState.setText("Please Join Meeting");
                             moxtra.setText("Join Meeting");
+                        } else {
+                            // something went wrong
                         }
 
-                    } else {
-                        // something went wrong
-                    }
-                }
-            });
+                        UpdateClientMarker();
 
+                    }
+
+                }
+            }
+
+        });
 
 
     }
@@ -441,16 +487,20 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     @Override
     public void onMapReady(final GoogleMap map) {
 
+        mMap = map;
 
         GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
 
                 LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+
+                /*
                 Marker mMarker = map.addMarker(new MarkerOptions().position(loc).draggable(true).title("Meet Here")
                         .snippet("Long press and drag to set location."));
 
                 marker = mMarker;
+
 
                 map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                     @Override
@@ -470,26 +520,48 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                     }
                 });
 
-                map.setOnMyLocationChangeListener(null);
 
-                if(map != null){
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 18.0f));
+               */
+
+
+                if (mMap != null && moveCamera) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f));
+                    moveCamera = false;
                 }
+
+                Log.d("inside map callback",ParseUser.getCurrentUser().getObjectId() + " " + clientId);
+
+                // If client
+                if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
+                    ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+                    ParseUser.getCurrentUser().put("location",point);
+                    ParseUser.getCurrentUser().saveInBackground();
+                }
+                // If tutor
+                else {
+                    ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+
+                    if(session!=null) {
+                        session.put("tutorLocation", point);
+                        session.saveInBackground();
+                    }
+                }
+
 
             }
         };
 
 
-
-        map.setMyLocationEnabled(true);
-        map.getUiSettings().setMyLocationButtonEnabled(true);
-        map.setOnMyLocationChangeListener(myLocationChangeListener);
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.setOnMyLocationChangeListener(myLocationChangeListener);
 
     }
 
 
+    void StartTutorMap() {
 
-
+    }
 
 
 }

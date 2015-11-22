@@ -63,6 +63,9 @@ public class SignUpActivity extends Activity {
         college = (EditText) findViewById(R.id.college);
         degree = (EditText) findViewById(R.id.degree);
 
+        StripeSignUp();
+
+
         // Set up the submit button click handler
         findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -121,7 +124,6 @@ public class SignUpActivity extends Activity {
                 dlg.show();
 
 
-                StripeSignUp();
 
                 // Set up a new Parse user
                 ParseUser user = new ParseUser();
@@ -135,8 +137,6 @@ public class SignUpActivity extends Activity {
                 user.put("degree", degree.getText().toString());
                 user.put("rating", 0.0);
                 user.put("stripeAccountId", mApp.getStripeSession().getUserId());
-
-
 
                 user.signUpInBackground(new SignUpCallback() {
 
