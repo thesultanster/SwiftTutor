@@ -15,15 +15,23 @@ import android.widget.Toast;
 
 import com.devmarvel.creditcardentry.library.CreditCard;
 import com.devmarvel.creditcardentry.library.CreditCardForm;
+import com.example.haasith.parse2.ApplicationData;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.booking.Booking;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
 import com.stripe.android.compat.AsyncTask;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
+import com.stripe.model.Customer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +48,8 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
     TextView total;
     ConfirmPaymentCommunicator communicator;
     int sum;
+
+    Customer customer;
 
 
     Stripe stripe = null;
@@ -68,8 +78,8 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
         total = (TextView) view.findViewById(R.id.total);
         form = (CreditCardForm) view.findViewById(R.id.credit_card_form);
 
-        sum = getArguments().getInt("sum");
-        total.setText("$" + String.valueOf(sum));
+        sum = getArguments().getInt("sum")*100;
+        total.setText("$" + String.valueOf(sum/100));
 
 
         //price   = (EditText) view.findViewById(R.id.price);
@@ -77,6 +87,7 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
         cancel.setOnClickListener(this);
         yes.setOnClickListener(this);
         editBooking.setOnClickListener(this);
+
 
         return view;
     }
@@ -89,24 +100,69 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
         } else if (view.getId() == R.id.yes) {
             chargeCard();
         } else if (view.getId() == R.id.editBooking) {
-            Intent intent = new Intent(getActivity(),Booking.class);
+            Intent intent = new Intent(getActivity(), Booking.class);
             startActivity(intent);
         }
 
     }
 
 
-
     private void chargeCard() {
         new AsyncTask<Void, Void, Void>() {
-
-            //Charge charge;
 
             @Override
             protected Void doInBackground(Void... params) {
 
+
+                String customerId = ParseUser.getCurrentUser().getString("customerId");
+
+                // If Id exists then do payment it
+                if (customerId != null) {
+
+                    Log.d("stripe customerId exists", customerId);
+
+                    final Map<String, Object> chargeParams = new HashMap<String, Object>();
+                    chargeParams.put("amount", sum);
+                    chargeParams.put("currency", "usd");
+                    chargeParams.put("customer", customerId);
+                    chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
+                    chargeParams.put("application_fee", 200);
+
+                    new AsyncTask<Void, Void, Void>() {
+
+                        Charge charge;
+
+
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            try {
+                                com.stripe.Stripe.apiKey = "sk_test_n8kyFez68piLJbbIOW7WW9yo";
+                                charge = Charge.create(chargeParams);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        protected void onPostExecute(Void result) {
+                            //Log.d("stripe charge info","Card Charged : " + charge.getCreated() + "\nPaid : " + charge.getPaid() );
+                        }
+
+                    }.execute();
+
+                    dismiss();
+                    communicator.onDialogPayment();
+                }
+
+
                 CreditCard creditCard = form.getCreditCard();
                 Card card = new Card(creditCard.getCardNumber(), creditCard.getExpMonth(), creditCard.getExpYear(), creditCard.getSecurityCode());
+
+                final Map<String, Object> defaultCardParams = new HashMap<String, Object>();
+                defaultCardParams.put("number", creditCard.getCardNumber());
+                defaultCardParams.put("exp_month", creditCard.getExpMonth());
+                defaultCardParams.put("exp_year", creditCard.getExpYear());
+                defaultCardParams.put("cvc", creditCard.getSecurityCode());
 
                 boolean validation = card.validateCard();
                 if (validation) {
@@ -115,44 +171,80 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
                         stripe.createToken(
                                 card,
                                 new TokenCallback() {
-                                    public void onSuccess(Token token) {
+                                    public void onSuccess(final Token token) {
                                         // Send token to your server
-
-                                        Log.d("stripe onsuccess", token.toString());
-                                        final Map<String, Object> chargeParams = new HashMap<String, Object>();
-                                        chargeParams.put("amount", 1000);
-                                        chargeParams.put("currency", "usd");
-                                        chargeParams.put("source", token.getId());
-                                        chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
-                                        chargeParams.put("application_fee", 200);
-
-                                        //chargeParams.put("card", token.getId()); //Token obtained in onSuccess() TokenCallback method of
 
                                         new AsyncTask<Void, Void, Void>() {
 
-                                            Charge charge;
-
+                                            String customerId;
 
                                             @Override
                                             protected Void doInBackground(Void... params) {
                                                 try {
+
+                                                    Log.d("stripe after customerId", "creating customer");
                                                     com.stripe.Stripe.apiKey = "sk_test_n8kyFez68piLJbbIOW7WW9yo";
-                                                    charge = Charge.create(chargeParams);
-                                                } catch (Exception e) {
-                                                    // TODO Auto-generated catch block
+                                                    Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
+                                                    defaultCustomerParams.put("card", defaultCardParams);
+                                                    defaultCustomerParams.put("description", "Description of Customer");
+                                                    customer = Customer.create(defaultCustomerParams);
+
+                                                } catch (AuthenticationException e) {
                                                     e.printStackTrace();
-                                                    /*showAlert("Exception while charging the card!",
-                                                            e.getLocalizedMessage());*/
+                                                } catch (InvalidRequestException e) {
+                                                    e.printStackTrace();
+                                                } catch (APIConnectionException e) {
+                                                    e.printStackTrace();
+                                                } catch (CardException e) {
+                                                    e.printStackTrace();
+                                                } catch (APIException e) {
+                                                    e.printStackTrace();
                                                 }
                                                 return null;
                                             }
 
                                             protected void onPostExecute(Void result) {
-                                                //Log.d("stripe charge info","Card Charged : " + charge.getCreated() + "\nPaid : " + charge.getPaid() );
+
+
+                                                customerId = customer.getId();
+                                                Log.d("stripe after customerId", customerId);
+
+                                                ParseUser.getCurrentUser().put("customerId", customerId);
+                                                ParseUser.getCurrentUser().saveInBackground();
+
+                                                Log.d("stripe onsuccess", token.toString());
+                                                final Map<String, Object> chargeParams = new HashMap<String, Object>();
+                                                chargeParams.put("amount", sum);
+                                                chargeParams.put("currency", "usd");
+                                                chargeParams.put("customer", customerId);
+                                                chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
+                                                chargeParams.put("application_fee", sum*0.20);
+
+                                                //chargeParams.put("card", token.getId()); //Token obtained in onSuccess() TokenCallback method of
+
+                                                new AsyncTask<Void, Void, Void>() {
+
+                                                    Charge charge;
+
+                                                    @Override
+                                                    protected Void doInBackground(Void... params) {
+                                                        try {
+                                                            com.stripe.Stripe.apiKey = ApplicationData.SECRET_KEY;
+                                                            charge = Charge.create(chargeParams);
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        return null;
+                                                    }
+
+                                                    protected void onPostExecute(Void result) {
+                                                        //Log.d("stripe charge info","Card Charged : " + charge.getCreated() + "\nPaid : " + charge.getPaid() );
+                                                    }
+
+                                                }.execute();
                                             }
 
                                         }.execute();
-
 
                                     }
 

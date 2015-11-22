@@ -1,4 +1,4 @@
-package com.example.haasith.parse2.stripe_connect;
+package com.example.haasith.parse2;
 
 /**
  * Created by sultankhan on 11/21/15.

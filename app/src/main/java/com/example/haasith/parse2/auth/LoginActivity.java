@@ -12,24 +12,14 @@ import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
-import com.example.haasith.parse2.stripe_connect.AppLog;
-import com.example.haasith.parse2.stripe_connect.ApplicationData;
+import com.example.haasith.parse2.ApplicationData;
 import com.example.haasith.parse2.stripe_connect.StripeApp;
 import com.example.haasith.parse2.stripe_connect.StripeButton;
 import com.example.haasith.parse2.stripe_connect.StripeConnectListener;
-import com.example.haasith.parse2.stripe_connect.StripeUtils;
-import com.moxtra.sdk.MXAccountManager;
-import com.moxtra.sdk.MXChatManager;
-import com.moxtra.sdk.MXSDKConfig;
-import com.moxtra.sdk.MXSDKException;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.stripe.Stripe;
-
-import org.json.JSONObject;
-
-import java.net.URL;
 
 //com.facebook.FacebookSdk
 
