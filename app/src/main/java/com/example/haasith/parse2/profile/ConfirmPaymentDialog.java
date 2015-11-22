@@ -87,7 +87,7 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
         if (view.getId() == R.id.cancel) {
             dismiss();
         } else if (view.getId() == R.id.yes) {
-            //chargeCard();
+            chargeCard();
         } else if (view.getId() == R.id.editBooking) {
             Intent intent = new Intent(getActivity(),Booking.class);
             startActivity(intent);
@@ -120,9 +120,14 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
 
                                         Log.d("stripe onsuccess", token.toString());
                                         final Map<String, Object> chargeParams = new HashMap<String, Object>();
-                                        chargeParams.put("amount", sum * 100);
+                                        chargeParams.put("amount", 1000);
                                         chargeParams.put("currency", "usd");
-                                        chargeParams.put("card", token.getId()); //Token obtained in onSuccess() TokenCallback method of
+                                        chargeParams.put("source", token.getId());
+                                        chargeParams.put("destination", "acct_179kg2E42B5njx1Y");
+                                        chargeParams.put("application_fee", 200);
+
+                                        //chargeParams.put("card", token.getId()); //Token obtained in onSuccess() TokenCallback method of
+
                                         new AsyncTask<Void, Void, Void>() {
 
                                             Charge charge;

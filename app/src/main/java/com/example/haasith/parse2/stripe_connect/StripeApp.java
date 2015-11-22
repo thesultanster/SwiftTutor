@@ -44,7 +44,7 @@ public class StripeApp {
 	private static int PHASE2 = 2;
 	private static final String AUTH_URL = "https://connect.stripe.com/oauth/authorize?";
 	private static final String TOKEN_URL = "https://connect.stripe.com/oauth/token";
-	private static final String SCOPE = "read_only";
+	private static final String SCOPE = "read_write";
 	
 	private static final String TAG = "StripeApp";
 	

@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.example.haasith.parse2.stripe_connect.AppLog;
 import com.example.haasith.parse2.stripe_connect.ApplicationData;
 import com.example.haasith.parse2.stripe_connect.StripeApp;
 import com.example.haasith.parse2.stripe_connect.StripeButton;
 import com.example.haasith.parse2.stripe_connect.StripeConnectListener;
+import com.example.haasith.parse2.stripe_connect.StripeUtils;
 import com.moxtra.sdk.MXAccountManager;
 import com.moxtra.sdk.MXChatManager;
 import com.moxtra.sdk.MXSDKConfig;
@@ -24,6 +26,10 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.stripe.Stripe;
+
+import org.json.JSONObject;
+
+import java.net.URL;
 
 //com.facebook.FacebookSdk
 
@@ -45,7 +51,7 @@ public class LoginActivity extends Activity  {
 
         tvSummary = (TextView) findViewById(R.id.tvSummary);
 
-         mApp = new StripeApp(this, "TestGuy", ApplicationData.CLIENT_ID,
+        mApp = new StripeApp(this, "TestGuy", ApplicationData.CLIENT_ID,
                 ApplicationData.SECRET_KEY, ApplicationData.CALLBACK_URL);
 
         mStripeButton = (StripeButton) findViewById(R.id.btnStripeConnect);
@@ -55,6 +61,27 @@ public class LoginActivity extends Activity  {
             @Override
             public void onConnected() {
                 tvSummary.setText("Connected as " + mApp.getAccessToken());
+
+                /*
+                URL url = new URL("https://api.stripe.com/v1/charges");
+                String urlParameters = "code=" + code
+                        + "&client_secret=" + mSecretKey
+                        + "&grant_type=authorization_code";
+                AppLog.i(TAG, "getAccessToken", "Getting access token with code:" + code);
+                AppLog.i(TAG, "getAccessToken", "Opening URL " + url.toString() + "?" + urlParameters);
+
+                String response = StripeUtils.executePost(TOKEN_URL, urlParameters);
+                JSONObject obj = new JSONObject(response);
+
+                AppLog.i(TAG, "getAccessToken", "String data[access_token]:			" + obj.getString("access_token"));
+                AppLog.i(TAG, "getAccessToken", "String data[livemode]:				" + obj.getBoolean("livemode"));
+                AppLog.i(TAG, "getAccessToken", "String data[refresh_token]:			" + obj.getString("refresh_token"));
+                AppLog.i(TAG, "getAccessToken", "String data[token_type]:			" + obj.getString("token_type"));
+                AppLog.i(TAG, "getAccessToken", "String data[stripe_publishable_key]: " + obj.getString("stripe_publishable_key"));
+                AppLog.i(TAG, "getAccessToken", "String data[stripe_user_id]:		" + obj.getString("stripe_user_id"));
+                AppLog.i(TAG, "getAccessToken", "String data[scope]:					" + obj.getString("scope"));
+                */
+
             }
 
             @Override
