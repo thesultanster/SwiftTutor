@@ -49,7 +49,8 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     Button startChrono;
     Chronometer chronometer;
     Boolean timerStarted = false;
-    long lastPause=0;
+    long timeWhenStopped = 0;
+
 
     String clientId;
     String tutorId;
@@ -127,11 +128,16 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
-                    ParseGeoPoint pPoint = users.get(0).getParseGeoPoint("location");
-                    LatLng loc = new LatLng(pPoint.getLatitude(), pPoint.getLongitude());
-                    mMap.clear();
-                    Marker mMarker = mMap.addMarker(new MarkerOptions().position(loc).draggable(false).title("Meet Client Here"));
+                    if(users.size() > 0) {
+                        ParseGeoPoint pPoint = users.get(0).getParseGeoPoint("location");
+                        LatLng loc = new LatLng(pPoint.getLatitude(), pPoint.getLongitude());
+                        mMap.clear();
+                        Marker mMarker = mMap.addMarker(new MarkerOptions().position(loc).draggable(false).title("Meet Client Here"));
+                    }
+                    else{
+                        Log.d("Recieved No Users", "inside UpdateCientMatker");
 
+                    }
                 } else {
                     Log.d("Currsesh user loc", "Error: " + e.getMessage());
                 }
@@ -185,12 +191,21 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         findTutorButton = (Button) findViewById(R.id.findTutorButton);
         startChrono = (Button) findViewById(R.id.startChrono);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+            @Override
             public void onChronometerTick(Chronometer cArg) {
-                long t = SystemClock.elapsedRealtime() - cArg.getBase();
-                cArg.setText(DateFormat.format("kk:mm:ss", t));
+                long time = SystemClock.elapsedRealtime() - cArg.getBase();
+                int h   = (int)(time /3600000);
+                int m = (int)(time - h*3600000)/60000;
+                int s= (int)(time - h*3600000- m*60000)/1000 ;
+                String hh = h < 10 ? "0"+h: h+"";
+                String mm = m < 10 ? "0"+m: m+"";
+                String ss = s < 10 ? "0"+s: s+"";
+                cArg.setText(hh+":"+mm+":"+ss);
             }
         });
+
+
         moxtra = (Button) findViewById(R.id.moxtraButton);
         tipText = (TextView) findViewById(R.id.tipText);
         state = (TextView) findViewById(R.id.state);
@@ -261,14 +276,18 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
             @Override
             public void onClick(View v) {
                if (timerStarted){
-                   lastPause = SystemClock.elapsedRealtime();
+                   timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                    chronometer.stop();
+                   timerStarted = false;
+                   startChrono.setText("Start Timer");
                }
                 else{
 
-                   //chronometer.setBase(SystemClock.elapsedRealtime());
-                   chronometer.setBase(chronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+                   chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                    chronometer.start();
+                   timerStarted = true;
+                   startChrono.setText("Pause Timer");
+
                }
 
             }
