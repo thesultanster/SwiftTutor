@@ -98,7 +98,7 @@
                         android:layout_height="60sp"
                         android:layout_margin="15dp"
                         android:backgroundTint="@color/colorAccent"
-                        android:text="Start Timer"
+                        android:text="Start Session"
                         android:textColor="#FFFFFF" />
 
                     <TextView

@@ -276,12 +276,19 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
             @Override
             public void onClick(View v) {
                if (timerStarted){
+
+                   session.put("timerStarted", false);
+                   session.saveInBackground();
+
                    timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                    chronometer.stop();
                    timerStarted = false;
                    startChrono.setText("Start Timer");
                }
                 else{
+
+                   session.put("timerStarted", true);
+                   session.saveInBackground();
 
                    chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                    chronometer.start();
@@ -560,21 +567,26 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                     moveCamera = false;
                 }
 
-                Log.d("inside map callback",ParseUser.getCurrentUser().getObjectId() + " " + clientId);
 
                 // If client
                 if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
-                    ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-                    ParseUser.getCurrentUser().put("location",point);
-                    ParseUser.getCurrentUser().saveInBackground();
+
+                    if (!session.getBoolean("timerStarted")) {
+                        Log.d("OnMyLocationChange","Client Updated Location");
+                        ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+                        ParseUser.getCurrentUser().put("location", point);
+                        ParseUser.getCurrentUser().saveInBackground();
+                    }
                 }
                 // If tutor
                 else {
                     ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-
                     if(session!=null) {
-                        session.put("tutorLocation", point);
-                        session.saveInBackground();
+                        if(!timerStarted) {
+                            Log.d("OnMyLocationChange","Tutor Updated Location");
+                            session.put("tutorLocation", point);
+                            session.saveInBackground();
+                        }
                     }
                 }
 
