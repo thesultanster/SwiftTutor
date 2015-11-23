@@ -1,4 +1,4 @@
-package com.example.haasith.parse2.find_tutor;
+package com.example.haasith.parse2.tutor_list;
 
 import android.location.Location;
 

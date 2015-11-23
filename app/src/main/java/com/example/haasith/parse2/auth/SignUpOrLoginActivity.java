@@ -6,16 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.moxtra.sdk.MXAccountManager;
-import com.moxtra.sdk.MXChatManager;
 import com.moxtra.sdk.MXSDKConfig;
-import com.moxtra.sdk.MXSDKException;
-import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 
@@ -37,7 +32,7 @@ public class SignUpOrLoginActivity extends Activity implements MXAccountManager.
 
             setupMoxtraUser(ParseUser.getCurrentUser().getString("username"), ParseUser.getCurrentUser().getString("lastname"), ParseUser.getCurrentUser().getUsername());
             Log.d("Login Status", "Current User Exists");
-            //startActivity(new Intent(this, FindTutor.class));
+            //startActivity(new Intent(this, TutorList.class));
             //finish();
         }
 

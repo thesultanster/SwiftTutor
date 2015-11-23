@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.example.haasith.parse2.tutor_list.TutorList;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -85,7 +84,7 @@ public class LoginActivity extends Activity  {
                         } else {
                             // Start an intent for the dispatch activity
                             Log.d("Login Status", "Success");
-                            Intent intent = new Intent(LoginActivity.this, FindTutor.class);
+                            Intent intent = new Intent(LoginActivity.this, TutorList.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             Log.d("Login Status", "Success");

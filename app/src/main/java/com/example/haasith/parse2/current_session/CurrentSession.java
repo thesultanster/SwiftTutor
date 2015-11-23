@@ -1,41 +1,33 @@
 package com.example.haasith.parse2.current_session;
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.haasith.parse2.R;
-import com.example.haasith.parse2.find_tutor.FindTutor;
-import com.example.haasith.parse2.find_tutor.TutorListRecyclerInfo;
-import com.example.haasith.parse2.util.NavigationDrawerFramework;
+import com.example.haasith.parse2.tutor_list.TutorList;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.moxtra.sdk.MXAccountManager;
 import com.moxtra.sdk.MXChatManager;
-import com.moxtra.sdk.MXSDKConfig;
 import com.moxtra.sdk.MXSDKException;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -53,7 +45,12 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     Button finishSession;
     Button moxtra;
     Button findTutorButton;
-    Button setLocation;
+
+    Button startChrono;
+    Chronometer chronometer;
+    Boolean timerStarted = false;
+    long lastPause=0;
+
     String clientId;
     String tutorId;
     String sessionId;
@@ -111,12 +108,11 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
 
         // If client
         if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
+            chronometer.setVisibility(View.GONE);
         }
         // If tutor
         else {
-
             UpdateClientMarker();
-
         }
 
 
@@ -187,7 +183,14 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
     void InflateVariables() {
         finishSession = (Button) findViewById(R.id.finishButton);
         findTutorButton = (Button) findViewById(R.id.findTutorButton);
-        setLocation = (Button) findViewById(R.id.setLocation);
+        startChrono = (Button) findViewById(R.id.startChrono);
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            public void onChronometerTick(Chronometer cArg) {
+                long t = SystemClock.elapsedRealtime() - cArg.getBase();
+                cArg.setText(DateFormat.format("kk:mm:ss", t));
+            }
+        });
         moxtra = (Button) findViewById(R.id.moxtraButton);
         tipText = (TextView) findViewById(R.id.tipText);
         state = (TextView) findViewById(R.id.state);
@@ -214,14 +217,6 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                 FragmentManager fragmentManager = getFragmentManager();
                 FinishUserSessionDialog myDialog = new FinishUserSessionDialog();
                 myDialog.show(fragmentManager, "Please Rate Tutor");
-            }
-        });
-
-        setLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                session.put("meetClientLocation", marker.getPosition());
-                session.saveInBackground();
             }
         });
 
@@ -257,8 +252,25 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         findTutorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FindTutor.class);
+                Intent intent = new Intent(getApplicationContext(), TutorList.class);
                 startActivity(intent);
+            }
+        });
+
+        startChrono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if (timerStarted){
+                   lastPause = SystemClock.elapsedRealtime();
+                   chronometer.stop();
+               }
+                else{
+
+                   //chronometer.setBase(SystemClock.elapsedRealtime());
+                   chronometer.setBase(chronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+                   chronometer.start();
+               }
+
             }
         });
 
@@ -473,7 +485,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
         });
 
 
-        Intent intent = new Intent(this, FindTutor.class);
+        Intent intent = new Intent(this, TutorList.class);
         startActivity(intent);
         finish();
 

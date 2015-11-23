@@ -1,4 +1,4 @@
-package com.example.haasith.parse2.find_tutor;
+package com.example.haasith.parse2.tutor_list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Haasith on 10/3/2015.
  */
-                                                                                                                         public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecyclerAdapter.MyViewHolder> {
+public class TutorListRecyclerAdapter extends RecyclerView.Adapter<TutorListRecyclerAdapter.MyViewHolder> {
 
     // emptyList takes care of null pointer exception
     List<TutorListRecyclerInfo> data = Collections.emptyList();
@@ -26,7 +26,7 @@ import java.util.List;
     Context context;
     //List<TutorListRecyclerInfo>mDataSet;
 
-    public TutorListRecyclerAdapter(FindTutor context, List<TutorListRecyclerInfo> data) {
+    public TutorListRecyclerAdapter(TutorList context, List<TutorListRecyclerInfo> data) {
         this.context = context;
         inflator = LayoutInflater.from(context);
         this.data = data;
@@ -70,10 +70,10 @@ import java.util.List;
                 intent.putExtra("tutorId", data.get(position).getParseObjectId());
                 intent.putExtra("college", data.get(position).getCollege());
                 intent.putExtra("degree", data.get(position).getDegree());
-                intent.putExtra("rating",data.get(position).getRating());
+                intent.putExtra("rating", data.get(position).getRating());
                 intent.putExtra("tutorHomework", data.get(position).getHomework());
                 intent.putExtra("tutorTest", data.get(position).getTest());
-                intent.putExtra("tutorCrash",data.get(position).getCrash());
+                intent.putExtra("tutorCrash", data.get(position).getCrash());
                 view.getContext().startActivity(intent);
             }
 
@@ -91,7 +91,7 @@ import java.util.List;
 
         holder.userName.setText(current.getUsername());
         //holder.firstName.setText(current.getFirstName());
-        holder.ratingBar.setRating((float)current.getRating());
+        holder.ratingBar.setRating((float) current.getRating());
         holder.distance.setText(String.valueOf(current.getDistance()) + "mi");
         holder.lowestPrice.setText(String.valueOf("$" + current.getLowestPrice()));
 

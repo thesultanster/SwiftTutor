@@ -1,19 +1,13 @@
 package com.example.haasith.parse2.util;
 
-import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
-import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.moxtra.sdk.MXAccountManager;
 import com.moxtra.sdk.MXSDKException;
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
-import com.parse.ParseUser;
-import com.parse.PushService;
-import com.parse.SaveCallback;
 
 
 /**

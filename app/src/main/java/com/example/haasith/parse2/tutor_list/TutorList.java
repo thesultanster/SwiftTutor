@@ -1,4 +1,4 @@
-package com.example.haasith.parse2.find_tutor;
+package com.example.haasith.parse2.tutor_list;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -24,14 +24,13 @@ import com.example.haasith.parse2.util.NavigationDrawerFramework;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindTutor extends NavigationDrawerFramework  {
+public class TutorList extends NavigationDrawerFramework  {
 
     RecyclerView recyclerView;
     private TutorListRecyclerAdapter adapter;
@@ -46,16 +45,16 @@ public class FindTutor extends NavigationDrawerFramework  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_tutor);
+        setContentView(R.layout.activity_tutor_list);
 
         getToolbar().setTitle("Find Tutors");
 
         handleIntent(getIntent());
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
+        adapter = new TutorListRecyclerAdapter(TutorList.this, new ArrayList<TutorListRecyclerInfo>());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(FindTutor.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(TutorList.this));
 
         math = (Button) findViewById(R.id.math);
         history = (Button) findViewById(R.id.history);
@@ -87,7 +86,7 @@ public class FindTutor extends NavigationDrawerFramework  {
             @Override
             public void onClick(View v) {
 
-                adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
+                adapter = new TutorListRecyclerAdapter(TutorList.this, new ArrayList<TutorListRecyclerInfo>());
                 recyclerView.setAdapter(adapter);
 
                 ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
@@ -103,7 +102,7 @@ public class FindTutor extends NavigationDrawerFramework  {
 
                             //ParseObject.pinAllInBackground(users);
 
-                            Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TutorList.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
                             Log.d("username", "Retrieved " + users.size() + " username");
                             for (int i = 0; i < users.size(); i++)
                             {
@@ -135,7 +134,7 @@ public class FindTutor extends NavigationDrawerFramework  {
 
                     //ParseObject.pinAllInBackground(users);
 
-                    Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TutorList.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
                     Log.d("username", "Retrieved " + users.size() + " username");
                     for (int i = 0; i < users.size(); i++)
                     {
@@ -176,14 +175,14 @@ public class FindTutor extends NavigationDrawerFramework  {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
-        SearchManager searchManager = (SearchManager) FindTutor.this.getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) TutorList.this.getSystemService(Context.SEARCH_SERVICE);
 
         searchView = null;
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(FindTutor.this.getComponentName()));
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(TutorList.this.getComponentName()));
         }
 
 
@@ -200,7 +199,7 @@ public class FindTutor extends NavigationDrawerFramework  {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String search = intent.getStringExtra(SearchManager.QUERY);
 
-            adapter = new TutorListRecyclerAdapter(FindTutor.this, new ArrayList<TutorListRecyclerInfo>());
+            adapter = new TutorListRecyclerAdapter(TutorList.this, new ArrayList<TutorListRecyclerInfo>());
             recyclerView.setAdapter(adapter);
 
             ParseGeoPoint userLocation = (ParseGeoPoint) ParseUser.getCurrentUser().get("location");
@@ -222,7 +221,7 @@ public class FindTutor extends NavigationDrawerFramework  {
 
                         //ParseObject.pinAllInBackground(users);
 
-                        Toast.makeText(FindTutor.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TutorList.this, String.valueOf(users.size()), Toast.LENGTH_SHORT).show();
                         Log.d("username", "Retrieved " + users.size() + " username");
                         for (int i = 0; i < users.size(); i++) {
                             adapter.addRow(new TutorListRecyclerInfo(users.get(i)));

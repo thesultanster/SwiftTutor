@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.haasith.parse2.find_tutor.FindTutor;
+import com.example.haasith.parse2.tutor_list.TutorList;
 
 public class MyActivity extends Activity {
 
@@ -30,7 +30,7 @@ public class MyActivity extends Activity {
     }*/
 
     public void list(View view){
-        Intent openlist =new Intent(this, FindTutor.class);
+        Intent openlist =new Intent(this, TutorList.class);
         startActivity(openlist);
     }
 

@@ -15,11 +15,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.haasith.parse2.tutor_list.TutorList;
 import com.example.haasith.parse2.profile.Profile;
 import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.current_session.CurrentSession;
 import com.example.haasith.parse2.view_offers.ViewOffers;
-import com.example.haasith.parse2.find_tutor.FindTutor;
 import com.parse.ParseUser;
 
 
@@ -151,7 +151,7 @@ public class NavigationDrawerFramework extends AppCompatActivity implements Navi
                 intent.putExtra("rating",user.getDouble("rating"));
                 break;
             case R.id.find_tutor:
-                intent = new Intent(this, FindTutor.class);
+                intent = new Intent(this, TutorList.class);
                 break;
             case R.id.view_offers:
                 intent = new Intent(this, ViewOffers.class);

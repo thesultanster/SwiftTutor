@@ -76,7 +76,7 @@
             android:label="@string/title_activity_my" >
         </activity>
         <activity
-            android:name=".find_tutor.FindTutor"
+            android:name=".tutor_list.TutorList"
             android:label="@string/title_activity_tutor_list"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -163,7 +163,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-<!--                   IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
+                <!-- IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
                 <category android:name="com.example.haasith.parse2" />
             </intent-filter>
         </receiver>
@@ -174,8 +174,8 @@
 
         <activity android:name=".booking.Booking" >
         </activity>
-
-
+        <activity android:name=".FindTutor" >
+        </activity>
     </application>
 
 </manifest>
