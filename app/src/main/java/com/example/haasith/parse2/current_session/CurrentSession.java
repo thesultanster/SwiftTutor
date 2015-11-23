@@ -232,6 +232,11 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                 FragmentManager fragmentManager = getFragmentManager();
                 FinishUserSessionDialog myDialog = new FinishUserSessionDialog();
                 myDialog.show(fragmentManager, "Please Rate Tutor");
+
+                // If Tutor
+                if (!ParseUser.getCurrentUser().getObjectId().equals(clientId)){
+                    PauseTimer();
+                }
             }
         });
 
@@ -276,30 +281,36 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
             @Override
             public void onClick(View v) {
                if (timerStarted){
-
-                   session.put("timerStarted", false);
-                   session.saveInBackground();
-
-                   timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
-                   chronometer.stop();
-                   timerStarted = false;
-                   startChrono.setText("Start Timer");
+                   PauseTimer();
                }
                 else{
-
-                   session.put("timerStarted", true);
-                   session.saveInBackground();
-
-                   chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                   chronometer.start();
-                   timerStarted = true;
-                   startChrono.setText("Pause Timer");
+                  StartTimer();
 
                }
 
             }
         });
 
+    }
+
+    void PauseTimer(){
+        session.put("timerStarted", false);
+        session.saveInBackground();
+
+        timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
+        chronometer.stop();
+        timerStarted = false;
+        startChrono.setText("Start Timer");
+    }
+
+    void StartTimer(){
+        session.put("timerStarted", true);
+        session.saveInBackground();
+
+        chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+        chronometer.start();
+        timerStarted = true;
+        startChrono.setText("Pause Timer");
     }
 
     void StartParseListenerThread() {
@@ -384,6 +395,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                         // If client finished session
                         if (session.get("clientRelease") == true) {
                             state.setText("Client Left the Session");
+                            PauseTimer();
                         }
 
 
