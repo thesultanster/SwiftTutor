@@ -163,8 +163,6 @@ public class ConfirmPaymentDialog extends DialogFragment implements View.OnClick
 
                         }.execute();
 
-                        dismiss();
-                        communicator.onDialogPayment();
                     }
                 }
 

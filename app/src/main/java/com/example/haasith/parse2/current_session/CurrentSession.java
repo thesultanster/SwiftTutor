@@ -583,11 +583,13 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                 // If client
                 if (ParseUser.getCurrentUser().getObjectId().equals(clientId)) {
 
-                    if (!session.getBoolean("timerStarted")) {
-                        Log.d("OnMyLocationChange","Client Updated Location");
-                        ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-                        ParseUser.getCurrentUser().put("location", point);
-                        ParseUser.getCurrentUser().saveInBackground();
+                    if(session!=null) {
+                        if (!session.getBoolean("timerStarted")) {
+                            Log.d("OnMyLocationChange", "Client Updated Location");
+                            ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+                            ParseUser.getCurrentUser().put("location", point);
+                            ParseUser.getCurrentUser().saveInBackground();
+                        }
                     }
                 }
                 // If tutor
