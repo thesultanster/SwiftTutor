@@ -19,5 +19,20 @@
             android:icon="@drawable/fab_background"
             android:title="Current Session"/>
 
+        <item
+            android:layout_gravity="bottom"
+            android:title="Account">
+            <menu>
+                <item
+                    android:id="@+id/settings"
+                    android:icon="@drawable/fab_background"
+                    android:title="Settings" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/fab_background"
+                    android:title="Log Out" />
+            </menu>
+        </item>
+
     </group>
 </menu>

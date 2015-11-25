@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.haasith.parse2.FindTutor;
 import com.example.haasith.parse2.R;
+import com.example.haasith.parse2.tutor_list.TutorList;
 import com.moxtra.sdk.MXAccountManager;
 import com.moxtra.sdk.MXSDKConfig;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 
@@ -24,16 +27,17 @@ public class SignUpOrLoginActivity extends Activity implements MXAccountManager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ParseInstallation.getCurrentInstallation().put("userId", ParseUser.getCurrentUser().getObjectId());
-        //ParseInstallation.getCurrentInstallation().saveInBackground();
 
         if (ParseUser.getCurrentUser() != null) {
             // Start an intent for the logged in activity
 
+            ParseInstallation.getCurrentInstallation().put("userId", ParseUser.getCurrentUser().getObjectId());
+            ParseInstallation.getCurrentInstallation().saveInBackground();
+
             setupMoxtraUser(ParseUser.getCurrentUser().getString("username"), ParseUser.getCurrentUser().getString("lastname"), ParseUser.getCurrentUser().getUsername());
             Log.d("Login Status", "Current User Exists");
-            //startActivity(new Intent(this, TutorList.class));
-            //finish();
+            startActivity(new Intent(this, TutorList.class));
+            finish();
         }
 
         // Log in button click handler

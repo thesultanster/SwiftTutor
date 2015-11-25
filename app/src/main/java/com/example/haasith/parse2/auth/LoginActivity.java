@@ -13,6 +13,7 @@ import com.example.haasith.parse2.R;
 import com.example.haasith.parse2.tutor_list.TutorList;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 //com.facebook.FacebookSdk
@@ -27,11 +28,6 @@ public class LoginActivity extends Activity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
-
-
 
 
         // Set up the login form.
@@ -82,6 +78,10 @@ public class LoginActivity extends Activity  {
                             Log.d("Login Status", "Fail");
                             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
+
+                            ParseInstallation.getCurrentInstallation().put("userId", ParseUser.getCurrentUser().getObjectId());
+                            ParseInstallation.getCurrentInstallation().saveInBackground();
+
                             // Start an intent for the dispatch activity
                             Log.d("Login Status", "Success");
                             Intent intent = new Intent(LoginActivity.this, TutorList.class);

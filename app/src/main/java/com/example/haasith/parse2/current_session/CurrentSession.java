@@ -258,7 +258,7 @@ public class CurrentSession extends AppCompatActivity implements FinishUserSessi
                 MXChatManager.getInstance().setOnMeetEndListener(new MXChatManager.OnEndMeetListener() {
                     @Override
                     public void onMeetEnded(String s) {
-                        session.put("meetingId", "0");
+                        session.put("meetin1gId", "0");
                         session.saveInBackground();
 
                     }

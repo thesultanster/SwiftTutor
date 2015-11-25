@@ -19,7 +19,10 @@ import com.example.haasith.parse2.booking.Booking;
 import com.example.haasith.parse2.current_session.CurrentSession;
 import com.example.haasith.parse2.R;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -214,6 +217,15 @@ public class Profile extends AppCompatActivity implements ConfirmPaymentCommunic
         session.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+
+
+                ParseQuery pushQuery = ParseInstallation.getQuery();
+                pushQuery.whereEqualTo("userId", tutorId);
+                ParsePush push = new ParsePush();
+                push.setQuery(pushQuery);
+                push.setMessage(ParseUser.getCurrentUser().getString("firstname") + " Sent A Tutoring Request!");
+                push.sendInBackground();
+
 
                 // MY_PREFS_NAME - a static String variable like:
                 //public static final String MY_PREFS_NAME = "MyPrefsFile";

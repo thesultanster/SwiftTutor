@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.haasith.parse2.auth.SignUpOrLoginActivity;
 import com.example.haasith.parse2.tutor_list.TutorList;
 import com.example.haasith.parse2.profile.Profile;
 import com.example.haasith.parse2.R;
@@ -158,6 +159,11 @@ public class NavigationDrawerFramework extends AppCompatActivity implements Navi
                 break;
             case R.id.current_session:
                 intent = new Intent(this, CurrentSession.class);
+                break;
+            case R.id.logout:
+                ParseUser.logOut();
+                intent = new Intent(this, SignUpOrLoginActivity.class);
+                finish();
                 break;
 
 
